@@ -71,7 +71,7 @@ export default function ContactPage() {
 
           <div className="insta-card">
             <img
-              src="/images/insta_profile.jpg"
+              src="/images/Insta_profile.jpg"
               alt="Instagram Profile"
               className="insta-avatar"
             />
