@@ -32,31 +32,27 @@ export const getSingleProduct = async (req, res) => {
 ========================= */
 export const createProduct = async (req, res) => {
   try {
-    // 🔒 IMAGE CHECK
-    if (!req.files || req.files.length === 0) {
-      return res.status(400).json({ error: "No images uploaded" });
+    // 🖼️ IMAGE PATHS (SAFE)
+    const imagePaths = req.files
+      ? req.files.map((file) => `/uploads/${file.filename}`)
+      : [];
+
+    // ⚖️ SAFE KG PRICE PARSE
+    let priceByKg = {};
+    try {
+      priceByKg = req.body.priceByKg
+        ? JSON.parse(req.body.priceByKg)
+        : {};
+    } catch {
+      return res.status(400).json({ error: "Invalid priceByKg format" });
     }
-
-    // 🖼️ IMAGE PATHS
-    const imagePaths = req.files.map(
-      (file) => `/uploads/${file.filename}`
-    );
-
-    // ⚖️ KG PRICE PARSE (VERY IMPORTANT)
-    // frontend should send JSON string
-    // example: { "0.5": 450, "1": 800, "2": 1500 }
-    const priceByKg = JSON.parse(req.body.priceByKg);
 
     const product = new Product({
       title: req.body.title,
-
-      priceByKg, // 🔥 MAIN CHANGE
-
-      rating: Number(req.body.rating),
-      reviews: req.body.reviews,
-
+      priceByKg,
+      rating: Number(req.body.rating) || 0,
+      reviews: req.body.reviews || [],
       images: imagePaths,
-
       category: req.body.category,
       flavor: req.body.flavor,
       occasion: req.body.occasion,
