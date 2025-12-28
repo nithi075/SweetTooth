@@ -4,16 +4,18 @@ import { FiHeart } from "react-icons/fi";
 import API from "../api";
 import { useNavigate } from "react-router-dom";
 
+const BACKEND_URL = "https://sweettooth-backend.onrender.com";
+
 export default function IndiaLoves() {
   const [cakes, setCakes] = useState([]);
-  const [wishlist, setWishlist] = useState([]); // store productIds
+  const [wishlist, setWishlist] = useState([]);
   const navigate = useNavigate();
 
   /* ================= FETCH PRODUCTS ================= */
   useEffect(() => {
     API.get("/products")
       .then((res) => setCakes(res.data))
-      .catch((err) => console.error(err));
+      .catch(console.error);
   }, []);
 
   /* ================= FETCH WISHLIST ================= */
@@ -23,7 +25,7 @@ export default function IndiaLoves() {
         const ids = res.data.map((item) => item.productId);
         setWishlist(ids);
       })
-      .catch((err) => console.error(err));
+      .catch(console.error);
   }, []);
 
   /* ================= TOGGLE WISHLIST ================= */
@@ -34,7 +36,7 @@ export default function IndiaLoves() {
       const res = await API.post("/wishlist", {
         productId: cake._id,
         title: cake.title,
-        price: cake.price,
+        price: cake.priceByKg?.["1"],
         img: cake.images?.[0],
         badge: cake.bestseller ? "Best Seller" : "",
       });
@@ -59,10 +61,10 @@ export default function IndiaLoves() {
             key={cake._id}
             onClick={() => navigate(`/cake/${cake._id}`)}
           >
-            {/* IMAGE – ONLY FIRST IMAGE */}
+            {/* IMAGE */}
             <div className="il-img-box">
               <img
-                src={`http://localhost:5000${cake.images?.[0]}`}
+                src={`${BACKEND_URL}${cake.images?.[0]}`}
                 alt={cake.title}
                 className="il-img"
                 loading="lazy"
@@ -74,7 +76,9 @@ export default function IndiaLoves() {
               <h3 className="il-name">{cake.title}</h3>
 
               <div className="price-heart-row">
-                <p className="il-price">₹{cake.price}</p>
+                <p className="il-price">
+                  ₹{cake.priceByKg?.["1"]}
+                </p>
 
                 <FiHeart
                   className={`heart ${

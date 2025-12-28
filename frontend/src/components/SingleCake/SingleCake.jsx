@@ -5,6 +5,8 @@ import { FiHeart } from "react-icons/fi";
 import API from "../api";
 import SingleCakeReview from "../SingleCakesReview/SIngleCakeReview";
 
+const BACKEND_URL = "https://sweettooth-backend.onrender.com";
+
 export default function SingleCake() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -14,7 +16,7 @@ export default function SingleCake() {
   const [activeImg, setActiveImg] = useState("");
   const [wishlist, setWishlist] = useState(false);
 
-  const [selectedKg, setSelectedKg] = useState("1"); // 🔥 DEFAULT 1KG
+  const [selectedKg, setSelectedKg] = useState("1");
   const [price, setPrice] = useState(0);
 
   const [message, setMessage] = useState("");
@@ -26,7 +28,6 @@ export default function SingleCake() {
       setCake(res.data);
       setActiveImg(res.data.images?.[0]);
 
-      // 🔥 SET DEFAULT PRICE FROM priceByKg
       if (res.data.priceByKg?.["1"]) {
         setPrice(res.data.priceByKg["1"]);
       }
@@ -69,7 +70,7 @@ export default function SingleCake() {
         title: cake.title,
         price,
         qty: 1,
-        kg: selectedKg, // 🔥 STORE KG
+        kg: selectedKg,
         img: cake.images[0],
         message,
       });
@@ -114,7 +115,7 @@ export default function SingleCake() {
               {cake.images.map((img, i) => (
                 <img
                   key={i}
-                  src={`http://localhost:5000${img}`}
+                  src={`${BACKEND_URL}${img}`}
                   className={`thumbnail ${activeImg === img ? "active" : ""}`}
                   onClick={() => setActiveImg(img)}
                   alt=""
@@ -128,7 +129,7 @@ export default function SingleCake() {
               )}
 
               <img
-                src={`http://localhost:5000${activeImg}`}
+                src={`${BACKEND_URL}${activeImg}`}
                 className="main-image"
                 alt={cake.title}
               />
@@ -139,14 +140,12 @@ export default function SingleCake() {
           <div className="right-column">
             <h1 className="cake-title">{cake.title}</h1>
 
-            {/* 🔥 KG SELECT */}
+            {/* KG SELECT */}
             <div className="kg-selector">
               {Object.keys(cake.priceByKg || {}).map((kg) => (
                 <button
                   key={kg}
-                  className={`kg-btn ${
-                    selectedKg === kg ? "active" : ""
-                  }`}
+                  className={`kg-btn ${selectedKg === kg ? "active" : ""}`}
                   onClick={() => handleKgChange(kg)}
                 >
                   {kg} Kg
@@ -211,7 +210,7 @@ export default function SingleCake() {
                 onClick={() => navigate(`/cake/${item._id}`)}
               >
                 <img
-                  src={`http://localhost:5000${item.images[0]}`}
+                  src={`${BACKEND_URL}${item.images[0]}`}
                   alt={item.title}
                 />
                 <h4>{item.title}</h4>
