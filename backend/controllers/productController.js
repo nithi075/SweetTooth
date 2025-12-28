@@ -47,22 +47,21 @@ export const createProduct = async (req, res) => {
       return res.status(400).json({ error: "No images uploaded" });
     }
 
-    // 🖼️ image paths
     const imagePaths = req.files.map(
       (file) => `/uploads/${file.filename}`
     );
 
-    // 🔥 SAFE JSON PARSE
-    let priceByKg = {};
+    // 🔥 SAFE PARSE
+    let priceByKg;
     try {
       priceByKg = JSON.parse(req.body.priceByKg);
-    } catch {
-      return res.status(400).json({ error: "Invalid priceByKg format" });
+    } catch (e) {
+      return res.status(400).json({ error: "Invalid priceByKg" });
     }
 
     const product = new Product({
       title: req.body.title,
-      priceByKg,
+      priceByKg, // ✅ plain object
       rating: Number(req.body.rating || 0),
       reviews: req.body.reviews || "",
       images: imagePaths,
@@ -81,3 +80,4 @@ export const createProduct = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+

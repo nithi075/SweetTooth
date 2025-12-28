@@ -1,25 +1,31 @@
 import mongoose from "mongoose";
 
-const productSchema = new mongoose.Schema({
-  title: String,
+const productSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
 
-  // 🔥 KG BASED PRICING
-  priceByKg: {
-    type: Map,
-    of: Number, // { "0.5": 450, "1": 800 }
-    required: true,
+    // 🔥 FIXED: Object instead of Map
+    priceByKg: {
+      type: Object,
+      required: true,
+    },
+
+    rating: Number,
+    reviews: String,
+
+    images: [String],
+
+    category: String,
+    flavor: String,
+    occasion: String,
+
+    eggless: Boolean,
+    bestseller: Boolean,
   },
-
-  rating: Number,
-  reviews: String,
-
-  images: [String],
-
-  category: String,
-  flavor: String,
-  occasion: String,
-  eggless: Boolean,
-  bestseller: Boolean,
-});
+  { timestamps: true }
+);
 
 export default mongoose.model("Product", productSchema);
