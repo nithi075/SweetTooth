@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./Contact.css";
+import "./contact.css";
 import {
   FaPhoneAlt,
   FaEnvelope,
