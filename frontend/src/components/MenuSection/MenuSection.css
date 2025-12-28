@@ -96,26 +96,48 @@
    MOBILE OPTIMIZATION
 ================================================== */
 @media (max-width: 600px) {
+
   .menu-section {
+    padding: 50px 20px;
     background: #fdecef;
   }
 
+  .menu-title {
+    font-size: 32px;
+  }
+
+  .menu-sub {
+    font-size: 18px;
+    margin-bottom: 40px;
+  }
+
+  /* 2 x 3 GRID */
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  /* CARD — FLAT */
   .menu-card {
     padding: 10px;
     box-shadow: none;
-    border-radius: 16px;
   }
 
-  .menu-card:hover {
-    transform: none;
-  }
-
+  /* REMOVE STARS ON MOBILE */
   .stars {
     display: none;
   }
 
+  /* IMAGE */
+  .menu-img {
+    height: 165px;
+    border-radius: 16px;
+  }
+
+  /* NAME */
   .menu-name {
+    font-size: 14px;
     margin-top: 10px;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.6px;
   }
 }

@@ -1,52 +1,45 @@
-/* -----------------------------------------
+/* =========================================
    OVERLAY
-------------------------------------------*/
+========================================= */
 .reel-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.88);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   z-index: 99999;
   backdrop-filter: blur(6px);
-  animation: fadeBg 0.3s ease;
 }
 
-@keyframes fadeBg {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* -----------------------------------------
-   MODAL WRAPPER
-------------------------------------------*/
+/* =========================================
+   MODAL
+========================================= */
 .reel-modal {
   position: relative;
-  width: 430px;
-  max-width: 95%;
-  animation: popUp 0.25s ease;
+  width: min(420px, 92vw);
   display: flex;
   flex-direction: column;
   align-items: center;
+  animation: pop 0.25s ease;
 }
 
-@keyframes popUp {
-  from { transform: scale(0.6); opacity: 0; }
+@keyframes pop {
+  from { transform: scale(0.85); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
 
-/* -----------------------------------------
-   VIDEO BOX (9:16)
-------------------------------------------*/
+/* =========================================
+   VIDEO
+========================================= */
 .video-wrapper {
-  position: relative;
   width: 100%;
   aspect-ratio: 9 / 16;
   background: #000;
   border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 12px 40px rgba(255, 90, 130, 0.45);
+  position: relative;
+  box-shadow: 0 16px 45px rgba(255, 79, 136, 0.5);
 }
 
 .reel-frame {
@@ -55,24 +48,19 @@
   border: none;
 }
 
-/* -----------------------------------------
+/* =========================================
    CLOSE BUTTON
-------------------------------------------*/
+========================================= */
 .close-btn {
   position: absolute;
-  top: -55px;
-  right: 0px;
+  top: -52px;
+  right: 0;
+  width: 38px;
+  height: 38px;
   background: #fff;
-  color: #333;
-  font-size: 24px;
-  width: 40px;
-  height: 40px;
   border-radius: 50%;
   border: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 5px 20px rgba(255, 105, 130, 0.4);
+  font-size: 22px;
   cursor: pointer;
   transition: 0.25s ease;
 }
@@ -80,23 +68,24 @@
 .close-btn:hover {
   background: var(--pink);
   color: #fff;
-  transform: scale(1.15);
+  transform: scale(1.1);
 }
 
-/* -----------------------------------------
-   ARROWS
-------------------------------------------*/
+/* =========================================
+   ARROWS (INSIDE VIDEO – SAFE)
+========================================= */
 .arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(0,0,0,0.55);
+  color: #fff;
   border: none;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -105,85 +94,36 @@
 
 .arrow:hover {
   background: var(--pink);
-  color: #fff;
 }
 
-.arrow.left { left: -60px; }
-.arrow.right { right: -60px; }
+.arrow.left { left: 10px; }
+.arrow.right { right: 10px; }
 
-/* -----------------------------------------
+/* =========================================
    CAPTION
-------------------------------------------*/
+========================================= */
 .caption {
-  color: #fff;
-  margin-top: 15px;
-  font-size: 16px;
+  margin-top: 14px;
   text-align: center;
+  font-size: 14px;
+  color: #fff;
   opacity: 0.9;
-  line-height: 1.4;
   max-width: 90%;
+  line-height: 1.4;
 }
 
-/* -----------------------------------------
-   RESPONSIVE FIXES
-------------------------------------------*/
-
-/* Tablets */
-@media (max-width: 900px) {
-  .arrow.left { left: -45px; }
-  .arrow.right { right: -45px; }
-}
-
-/* Mobile */
-@media (max-width: 600px) {
-  .reel-modal {
-    width: 350px;
+/* =========================================
+   MOBILE
+========================================= */
+@media (max-width: 480px) {
+  .close-btn {
+    top: -44px;
   }
 
   .arrow {
-    width: 38px;
-    height: 38px;
-    font-size: 18px;
-  }
-
-  /* move outside arrows into top-center region */
-  .arrow.left {
-    left: 10px;
-    top: 48%;
-  }
-
-  .arrow.right {
-    right: 10px;
-    top: 48%;
-  }
-
-  .close-btn {
-    top: -45px;
-    right: -5px;
-  }
-
-  .caption {
-    font-size: 14px;
-    padding: 0 10px;
-  }
-}
-
-/* Very small phones */
-@media (max-width: 400px) {
-  .reel-modal {
-    width: 300px;
-  }
-
-  .arrow {
-    width: 34px;
-    height: 34px;
-    font-size: 16px;
-  }
-
-  .close-btn {
     width: 36px;
     height: 36px;
-    font-size: 20px;
+    font-size: 16px;
   }
 
   .caption {
