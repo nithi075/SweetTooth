@@ -236,3 +236,13 @@
     font-size: 15px;
   }
 }
+.footer-secret {
+  cursor: pointer;
+  opacity: 0.8;
+  text-decoration: none;   /* 🔥 underline remove */
+}
+
+.footer-secret:hover {
+  opacity: 1;
+  text-decoration: none;   /* 🔥 hover-layum illa */
+}

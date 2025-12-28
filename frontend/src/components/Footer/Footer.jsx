@@ -1,20 +1,27 @@
 import "./Footer.css";
-import { FaInstagram, FaFacebookF, FaYoutube, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
+import {
+  FaInstagram,
+  FaFacebookF,
+  FaYoutube,
+  FaPhoneAlt,
+  FaMapMarkerAlt,
+} from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 export default function Footer() {
+  const navigate = useNavigate();
+
   return (
     <footer className="footer">
-
       {/* WAVE BACKGROUND */}
       <div className="footer-wave"></div>
 
       <div className="footer-container">
-
         {/* BRAND BLOCK */}
         <div className="footer-section brand">
-          <img 
-            src="/src/assets/SweetTooth_Logo.png" 
-            alt="Logo" 
+          <img
+            src="/images/logo.png"
+            alt="Logo"
             className="footer-cupcake"
           />
           <h2 className="footer-logo">Sweet Tooth</h2>
@@ -26,12 +33,15 @@ export default function Footer() {
 
         {/* CONTACT + SOCIAL ROW */}
         <div className="footer-row">
-
           {/* CONTACT */}
           <div className="footer-section">
             <h3 className="footer-title">Contact</h3>
-            <p className="footer-contact"><FaPhoneAlt /> +91 82200 91042</p>
-            <p className="footer-contact"><FaMapMarkerAlt /> Trichy, Tamil Nadu</p>
+            <p className="footer-contact">
+              <FaPhoneAlt /> +91 82200 91042
+            </p>
+            <p className="footer-contact">
+              <FaMapMarkerAlt /> Trichy, Tamil Nadu
+            </p>
           </div>
 
           {/* SOCIAL */}
@@ -43,16 +53,19 @@ export default function Footer() {
               <a href="#"><FaYoutube /></a>
             </div>
           </div>
-
         </div>
-
       </div>
 
-      {/* COPYRIGHT */}
+      {/* COPYRIGHT – SECRET ADMIN LINK 😈 */}
       <div className="footer-bottom">
-        <p>© {new Date().getFullYear()} Sweet Tooth — Made With Love ❤️</p>
+        <p
+          className="footer-secret"
+          onClick={() => navigate("/add-cake")}
+          title="Admin access"
+        >
+          © {new Date().getFullYear()} Sweet Tooth — Made With Love ❤️
+        </p>
       </div>
-
     </footer>
   );
 }
