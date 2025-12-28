@@ -7,6 +7,7 @@ import API from "../api";
 export default function Treats() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const BACKEND_URL = "https://sweettooth-backend.onrender.com";
 
   /* =========================
      STATES
@@ -209,11 +210,12 @@ export default function Treats() {
             onClick={() => navigate(`/cake/${cake._id}`)}
           >
             <div className="card-img-box">
-              <img
-                src={`http://localhost:5000${cake.images?.[0]}`}
-                className="treat-img"
-                alt={cake.title}
-              />
+                        <img
+              src={`${BACKEND_URL}${cake.images?.[0]}`}
+              className="treat-img"
+              alt={cake.title}
+            />
+
 
               {cake.bestseller && (
                 <span className="badge">Best Seller</span>
@@ -224,7 +226,8 @@ export default function Treats() {
               <h3 className="cake-name">{cake.title}</h3>
 
               <div className="price-heart-row">
-                <p className="price">₹{cake.price}</p>
+               <p className="price">₹{cake.priceByKg?.["1"]}</p>
+
 
                 <FiHeart
                   className={`heart-icon ${
