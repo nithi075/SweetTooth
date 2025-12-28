@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Cart.css";
+import "./cart.css";
 import { FiTrash2, FiEdit2 } from "react-icons/fi";
 import API from "../api";
 

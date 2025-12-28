@@ -2,10 +2,10 @@ import "./MenuSection.css";
 import { useNavigate } from "react-router-dom";
 
 const categories = [
-  { id: 1, title: "CAKE", value: "cake", img: "/src/assets/menu/menu1.jpg" },
-  { id: 2, title: "DESSERTS", value: "desserts", img: "/src/assets/menu/menu2.jpg" },
-  { id: 3, title: "DESIGNER", value: "designer", img: "/src/assets/menu/menu3.jpg" },
-  { id: 4, title: "BROWNIE", value: "brownie", img: "/src/assets/menu/menu4.jpg" },
+  { id: 1, title: "CAKE", value: "cake", img: "/images/menu/menu1.jpg" },
+  { id: 2, title: "DESSERTS", value: "desserts", img: "/images/menu/menu2.jpg" },
+  { id: 3, title: "DESIGNER", value: "designer", img: "/images/menu/menu3.jpg" },
+  { id: 4, title: "BROWNIE", value: "brownie", img: "/images/menu/menu4.jpg" },
 ];
 
 export default function MenuSection() {
@@ -23,7 +23,6 @@ export default function MenuSection() {
             key={item.id}
             onClick={() => navigate(`/treat?category=${item.value}`)}
           >
-            {/* ⭐ STARS (DESKTOP ONLY) */}
             <div className="stars">
               <span>★</span><span>★</span><span>★</span>
               <span>★</span><span>★</span>

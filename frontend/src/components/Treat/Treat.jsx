@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import "./treat.css";
+import "./Treat.css";
 import { FiHeart } from "react-icons/fi";
 import API from "../api";
 
