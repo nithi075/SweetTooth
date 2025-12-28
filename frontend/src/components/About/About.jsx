@@ -15,7 +15,7 @@ export default function AboutUs() {
       <div className="about-container">
         <div className="about-image-box">
           <img
-            src="/src/assets/banner.png"
+            src="/images/about/banner.png"
             alt="Sweet Tooth Bakery"
             className="about-img"
           />
@@ -44,19 +44,19 @@ export default function AboutUs() {
 
         <div className="mission-cards">
           <div className="mission-card">
-            <img src="/src/assets/about1.jpg" alt="Fresh" />
+            <img src="/images/about/about1.jpg" alt="Fresh" />
             <h3>Fresh Ingredients</h3>
             <p>We bake fresh everyday using premium ingredients.</p>
           </div>
 
           <div className="mission-card">
-            <img src="/src/assets/about2.jpg" alt="Love" />
+            <img src="/images/about/about2.jpg" alt="Love" />
             <h3>Baked With Love</h3>
             <p>Every dessert is handcrafted with care and passion.</p>
           </div>
 
           <div className="mission-card">
-            <img src="/src/assets/about3.jpg" alt="Custom" />
+            <img src="/images/about/about3.jpg" alt="Custom" />
             <h3>Custom Creations</h3>
             <p>We design cakes that match your story and celebration.</p>
           </div>
