@@ -7,7 +7,7 @@ export const getProducts = async (req, res) => {
   try {
     const products = await Product.find();
 
-    // 🔥 frontend compatibility
+    // frontend compatibility
     const formatted = products.map((p) => ({
       ...p._doc,
       price: p.priceByKg?.["1"] || 0,
@@ -26,45 +26,48 @@ export const getProducts = async (req, res) => {
 export const getSingleProduct = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
-    if (!product)
+
+    if (!product) {
       return res.status(404).json({ error: "Product not found" });
+    }
 
     res.json({
       ...product._doc,
       price: product.priceByKg?.["1"] || 0,
     });
   } catch (err) {
+    console.error("GET SINGLE PRODUCT ERROR:", err);
     res.status(500).json({ error: err.message });
   }
 };
 
 /* =========================
-   CREATE PRODUCT
+   CREATE PRODUCT (🔥 CLOUDINARY)
 ========================= */
 export const createProduct = async (req, res) => {
   try {
+    // 🔴 No images uploaded
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({ error: "No images uploaded" });
     }
 
-    const imagePaths = req.files.map(
-      (file) => `/uploads/${file.filename}`
-    );
+    // ✅ Cloudinary gives FULL URL in file.path
+    const imageUrls = req.files.map((file) => file.path);
 
-    // 🔥 SAFE PARSE
+    // 🔴 Parse priceByKg safely
     let priceByKg;
     try {
       priceByKg = JSON.parse(req.body.priceByKg);
-    } catch (e) {
-      return res.status(400).json({ error: "Invalid priceByKg" });
+    } catch (err) {
+      return res.status(400).json({ error: "Invalid priceByKg format" });
     }
 
     const product = new Product({
       title: req.body.title,
-      priceByKg, // ✅ plain object
+      priceByKg,
       rating: Number(req.body.rating || 0),
       reviews: req.body.reviews || "",
-      images: imagePaths,
+      images: imageUrls, // 🔥 FULL Cloudinary URLs
       category: req.body.category,
       flavor: req.body.flavor,
       occasion: req.body.occasion,
@@ -80,4 +83,3 @@ export const createProduct = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-
