@@ -6,7 +6,6 @@ import {
   FaPhoneAlt,
   FaMapMarkerAlt,
 } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -31,7 +30,6 @@ export default function Footer() {
 
         {/* CONTACT + SOCIAL ROW */}
         <div className="footer-row">
-          {/* CONTACT */}
           <div className="footer-section">
             <h3 className="footer-title">Contact</h3>
             <p className="footer-contact">
@@ -42,7 +40,6 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* SOCIAL */}
           <div className="footer-section">
             <h3 className="footer-title">Follow Us</h3>
             <div className="footer-social">
@@ -54,15 +51,17 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* COPYRIGHT – SECRET ADMIN LINK 😈 */}
+      {/* SECRET ADMIN LINK 😈 */}
       <div className="footer-bottom">
-        <NavLink
-          to="/add-cake"
+        <p
           className="footer-secret"
+          onClick={() => {
+            window.location.href = "/add-cake";
+          }}
           title="Admin access"
         >
           © {new Date().getFullYear()} Sweet Tooth — Made With Love ❤️
-        </NavLink>
+        </p>
       </div>
     </footer>
   );
