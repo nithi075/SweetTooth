@@ -36,11 +36,19 @@ export default function Header() {
 
         {/* LOGO */}
         <NavLink to="/" className="logo-section">
+<<<<<<< HEAD
          <img
             src="/images/logo.png"
             alt="logo"
             className="header-logo"
           />
+=======
+        <img
+          src="/images/logo.png"
+          alt="logo"
+          className="header-logo"
+        />
+>>>>>>> 1ba51a7c9c5a940944390705adb0765bd795dafb
 
           <div className="logo-text">
             <h2>Sweet Tooth</h2>
