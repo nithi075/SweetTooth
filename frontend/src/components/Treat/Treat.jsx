@@ -4,7 +4,10 @@ import "./Treat.css";
 import { FiHeart } from "react-icons/fi";
 import API from "../api";
 
-const BACKEND_URL = "https://sweettooth-backend.onrender.com";
+/* ================= BACKEND URL ================= */
+const BACKEND_URL =
+  import.meta.env.VITE_BACKEND_URL ||
+  "https://sweettooth-backend.onrender.com";
 
 export default function Treats() {
   const navigate = useNavigate();
@@ -43,7 +46,7 @@ export default function Treats() {
       .then((res) =>
         setWishlist(res.data.map((item) => item.productId))
       )
-      .catch(console.error);
+      .catch((err) => console.error("Wishlist error:", err));
   }, []);
 
   /* =========================
@@ -60,6 +63,16 @@ export default function Treats() {
   useEffect(() => {
     setCurrentPage(1);
   }, [category, priceRange, onlyBestseller, sortBy]);
+
+  /* =========================
+     IMAGE URL HANDLER (🔥 FIX)
+  ========================= */
+  const getImageUrl = (cake) => {
+    const img = cake.images?.[0];
+    if (!img) return "/assets/placeholder.png";
+    if (img.startsWith("http")) return img; // Cloudinary
+    return `${BACKEND_URL}${img}`; // old local safety
+  };
 
   /* =========================
      TOGGLE WISHLIST
@@ -124,23 +137,75 @@ export default function Treats() {
     <section className="treats-section">
       {/* FILTER BAR */}
       <div className="filter-bar">
-        <button className={`filter-chip ${category === "all" ? "active" : ""}`} onClick={() => setCategory("all")}>All</button>
-        <button className={`filter-chip ${category === "classic" ? "active" : ""}`} onClick={() => setCategory("classic")}>Classic</button>
-        <button className={`filter-chip ${category === "gourmet" ? "active" : ""}`} onClick={() => setCategory("gourmet")}>Desserts</button>
-        <button className={`filter-chip ${category === "designer" ? "active" : ""}`} onClick={() => setCategory("designer")}>Designer</button>
+        <button
+          className={`filter-chip ${category === "all" ? "active" : ""}`}
+          onClick={() => setCategory("all")}
+        >
+          All
+        </button>
 
-        <button className={`filter-chip ${priceRange === "low" ? "active" : ""}`} onClick={() => setPriceRange("low")}>Under ₹500</button>
-        <button className={`filter-chip ${priceRange === "mid" ? "active" : ""}`} onClick={() => setPriceRange("mid")}>₹500–₹1000</button>
-        <button className={`filter-chip ${priceRange === "high" ? "active" : ""}`} onClick={() => setPriceRange("high")}>Above ₹1000</button>
+        <button
+          className={`filter-chip ${category === "classic" ? "active" : ""}`}
+          onClick={() => setCategory("classic")}
+        >
+          Classic
+        </button>
 
-        <button className={`filter-chip ${onlyBestseller ? "active" : ""}`} onClick={() => setOnlyBestseller(!onlyBestseller)}>Bestseller</button>
+        <button
+          className={`filter-chip ${category === "gourmet" ? "active" : ""}`}
+          onClick={() => setCategory("gourmet")}
+        >
+          Desserts
+        </button>
 
-        {/* SECRET ADMIN */}
-        <button className="filter-chip secret-chip" onClick={() => navigate("/add-cake")}>
+        <button
+          className={`filter-chip ${category === "designer" ? "active" : ""}`}
+          onClick={() => setCategory("designer")}
+        >
+          Designer
+        </button>
+
+        <button
+          className={`filter-chip ${priceRange === "low" ? "active" : ""}`}
+          onClick={() => setPriceRange("low")}
+        >
+          Under ₹500
+        </button>
+
+        <button
+          className={`filter-chip ${priceRange === "mid" ? "active" : ""}`}
+          onClick={() => setPriceRange("mid")}
+        >
+          ₹500–₹1000
+        </button>
+
+        <button
+          className={`filter-chip ${priceRange === "high" ? "active" : ""}`}
+          onClick={() => setPriceRange("high")}
+        >
+          Above ₹1000
+        </button>
+
+        <button
+          className={`filter-chip ${onlyBestseller ? "active" : ""}`}
+          onClick={() => setOnlyBestseller(!onlyBestseller)}
+        >
+          Bestseller
+        </button>
+
+        {/* ADMIN */}
+        <button
+          className="filter-chip secret-chip"
+          onClick={() => navigate("/add-cake")}
+        >
           More
         </button>
 
-        <select className="sort-btn" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+        <select
+          className="sort-btn"
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+        >
           <option value="">Sort</option>
           <option value="priceLow">Price: Low → High</option>
           <option value="priceHigh">Price: High → Low</option>
@@ -151,15 +216,22 @@ export default function Treats() {
       {/* PRODUCTS GRID */}
       <div className="treats-grid">
         {paginatedProducts.map((cake) => (
-          <div key={cake._id} className="treat-card" onClick={() => navigate(`/cake/${cake._id}`)}>
+          <div
+            key={cake._id}
+            className="treat-card"
+            onClick={() => navigate(`/cake/${cake._id}`)}
+          >
             <div className="card-img-box">
               <img
-                src={`${BACKEND_URL}${cake.images?.[0]}`}
+                src={getImageUrl(cake)}
                 alt={cake.title}
                 className="treat-img"
+                loading="lazy"
                 onError={(e) => (e.target.src = "/assets/placeholder.png")}
               />
-              {cake.bestseller && <span className="badge">Best Seller</span>}
+              {cake.bestseller && (
+                <span className="badge">Best Seller</span>
+              )}
             </div>
 
             <div className="card-content">
@@ -167,7 +239,9 @@ export default function Treats() {
               <div className="price-heart-row">
                 <p className="price">₹{cake.priceByKg?.["1"]}</p>
                 <FiHeart
-                  className={`heart-icon ${wishlist.includes(cake._id) ? "active" : ""}`}
+                  className={`heart-icon ${
+                    wishlist.includes(cake._id) ? "active" : ""
+                  }`}
                   onClick={(e) => toggleWishlist(cake, e)}
                 />
               </div>
@@ -179,13 +253,29 @@ export default function Treats() {
       {/* PAGINATION */}
       {totalPages > 1 && (
         <div className="pagination">
-          <button disabled={currentPage === 1} onClick={() => setCurrentPage((p) => p - 1)}>Prev</button>
+          <button
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage((p) => p - 1)}
+          >
+            Prev
+          </button>
+
           {Array.from({ length: totalPages }, (_, i) => (
-            <button key={i} className={currentPage === i + 1 ? "active" : ""} onClick={() => setCurrentPage(i + 1)}>
+            <button
+              key={i}
+              className={currentPage === i + 1 ? "active" : ""}
+              onClick={() => setCurrentPage(i + 1)}
+            >
               {i + 1}
             </button>
           ))}
-          <button disabled={currentPage === totalPages} onClick={() => setCurrentPage((p) => p + 1)}>Next</button>
+
+          <button
+            disabled={currentPage === totalPages}
+            onClick={() => setCurrentPage((p) => p + 1)}
+          >
+            Next
+          </button>
         </div>
       )}
     </section>
