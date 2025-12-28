@@ -237,12 +237,13 @@
   }
 }
 .footer-secret {
+  text-decoration: none;   /* 🔥 underline remove */
+  color: inherit;          /* 🔥 normal text color */
   cursor: pointer;
   opacity: 0.8;
-  text-decoration: none;   /* 🔥 underline remove */
 }
 
 .footer-secret:hover {
+  text-decoration: none;
   opacity: 1;
-  text-decoration: none;   /* 🔥 hover-layum illa */
 }

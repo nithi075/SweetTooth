@@ -6,11 +6,9 @@ import {
   FaPhoneAlt,
   FaMapMarkerAlt,
 } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Footer() {
-  const navigate = useNavigate();
-
   return (
     <footer className="footer">
       {/* WAVE BACKGROUND */}
@@ -58,13 +56,13 @@ export default function Footer() {
 
       {/* COPYRIGHT – SECRET ADMIN LINK 😈 */}
       <div className="footer-bottom">
-        <p
+        <NavLink
+          to="/add-cake"
           className="footer-secret"
-          onClick={() => navigate("/add-cake")}
           title="Admin access"
         >
           © {new Date().getFullYear()} Sweet Tooth — Made With Love ❤️
-        </p>
+        </NavLink>
       </div>
     </footer>
   );
