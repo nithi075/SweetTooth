@@ -170,15 +170,13 @@ export default function Treats() {
           Above ₹1000
         </button>
 
-        {/* BESTSELLER */}<NavLink to="/add-cake">
-            <button
+        {/* BESTSELLER */}
+        <button
           className={`filter-chip ${onlyBestseller ? "active" : ""}`}
           onClick={() => setOnlyBestseller(!onlyBestseller)}
         >
           Bestseller
         </button>
-        </NavLink>
-      
 
         {/* SORT */}
         <select
