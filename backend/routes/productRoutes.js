@@ -4,7 +4,6 @@ import {
   getSingleProduct,
   createProduct,
 } from "../controllers/productController.js";
-
 import upload from "../middleware/upload.js";
 
 const router = express.Router();
@@ -12,7 +11,7 @@ const router = express.Router();
 router.get("/", getProducts);
 router.get("/:id", getSingleProduct);
 
-// 🔥 IMAGE UPLOAD ROUTE
+// 🔥 CREATE PRODUCT (with images)
 router.post("/", upload.array("images", 5), createProduct);
 
 export default router;

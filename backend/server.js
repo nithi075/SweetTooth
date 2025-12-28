@@ -2,7 +2,6 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import path from "path";
-import fs from "fs";
 import { fileURLToPath } from "url";
 
 // ROUTES
@@ -23,35 +22,26 @@ const __dirname = path.dirname(__filename);
 
 /* ================= MIDDLEWARE ================= */
 app.use(cors());
-app.use(express.json()); // for JSON bodies
-app.use(express.urlencoded({ extended: true })); // 🔥 REQUIRED for FormData (multer)
+app.use(express.json());
 
-/* ================= ENSURE UPLOADS FOLDER ================= */
-const uploadsDir = path.join(__dirname, "uploads");
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir);
-  console.log("📁 uploads folder created");
-}
-
-/* ================= HEALTH CHECK ================= */
+/* ================= HEALTH CHECK (PROOF) ================= */
 app.get("/__health", (req, res) => {
   res.json({
     ok: true,
-    server: "SweetTooth backend running",
+    file: "THIS_server.js",
   });
 });
 
 /* ================= STATIC FILES ================= */
-app.use("/uploads", express.static(uploadsDir));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 /* ================= API ROUTES ================= */
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/wishlist", wishlistRoutes);
 app.use("/api/orders", orderRoutes);
-app.use("/api/reviews", reviewRoutes);
+app.use("/api/reviews", reviewRoutes); // 🔥 REVIEWS ROUTE
 app.use("/api/messages", messageRoutes);
-
 /* ================= DB ================= */
 mongoose
   .connect(
@@ -61,7 +51,6 @@ mongoose
   .catch((err) => console.error("❌ Mongo Error:", err));
 
 /* ================= SERVER ================= */
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
+app.listen(5000, () => {
+  console.log("🚀 Server running on http://localhost:5000");
 });
