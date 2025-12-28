@@ -1,32 +1,21 @@
 import Product from "../models/Product.js";
 
 /* =========================
-   GET ALL PRODUCTS (FIXED 500)
+   GET ALL PRODUCTS
 ========================= */
 export const getProducts = async (req, res) => {
   try {
-    const products = await Product.find().lean();
+    const products = await Product.find();
 
-    const safeProducts = products.map((p) => {
-      let price = 0;
+    // 🔥 frontend compatibility
+    const formatted = products.map((p) => ({
+      ...p._doc,
+      price: p.priceByKg?.["1"] || 0,
+    }));
 
-      if (
-        p.priceByKg &&
-        typeof p.priceByKg === "object" &&
-        Object.keys(p.priceByKg).length > 0
-      ) {
-        price = Object.values(p.priceByKg)[0];
-      }
-
-      return {
-        ...p,
-        price, // frontend compatibility
-      };
-    });
-
-    res.json(safeProducts);
+    res.json(formatted);
   } catch (err) {
-    console.error("❌ GET PRODUCTS ERROR:", err);
+    console.error("GET PRODUCTS ERROR:", err);
     res.status(500).json({ error: err.message });
   }
 };
@@ -37,17 +26,20 @@ export const getProducts = async (req, res) => {
 export const getSingleProduct = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
-    if (!product) {
+    if (!product)
       return res.status(404).json({ error: "Product not found" });
-    }
-    res.json(product);
+
+    res.json({
+      ...product._doc,
+      price: product.priceByKg?.["1"] || 0,
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
 /* =========================
-   CREATE PRODUCT (FIXED)
+   CREATE PRODUCT
 ========================= */
 export const createProduct = async (req, res) => {
   try {
@@ -55,35 +47,37 @@ export const createProduct = async (req, res) => {
       return res.status(400).json({ error: "No images uploaded" });
     }
 
+    // 🖼️ image paths
     const imagePaths = req.files.map(
       (file) => `/uploads/${file.filename}`
     );
 
+    // 🔥 SAFE JSON PARSE
     let priceByKg = {};
     try {
       priceByKg = JSON.parse(req.body.priceByKg);
     } catch {
-      return res.status(400).json({ error: "Invalid priceByKg JSON" });
+      return res.status(400).json({ error: "Invalid priceByKg format" });
     }
 
     const product = new Product({
       title: req.body.title,
       priceByKg,
+      rating: Number(req.body.rating || 0),
+      reviews: req.body.reviews || "",
       images: imagePaths,
       category: req.body.category,
       flavor: req.body.flavor,
       occasion: req.body.occasion,
       eggless: req.body.eggless === "true",
       bestseller: req.body.bestseller === "true",
-      rating: Number(req.body.rating) || 0,
-      reviews: req.body.reviews || [],
     });
 
     await product.save();
 
     res.status(201).json(product);
   } catch (err) {
-    console.error("❌ CREATE PRODUCT ERROR:", err);
+    console.error("CREATE PRODUCT ERROR:", err);
     res.status(500).json({ error: err.message });
   }
 };
