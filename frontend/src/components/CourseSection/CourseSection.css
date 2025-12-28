@@ -5,63 +5,72 @@
   --beige-light: #EBE8D8;
 }
 
-
-/* MAIN WRAPPER */
+/* ==================================================
+   MAIN WRAPPER
+================================================== */
 .courses-wrapper {
   width: 100%;
   text-align: center;
-  padding: 100px 60px;
+  padding: clamp(60px, 8vw, 100px) clamp(20px, 6vw, 60px);
   background: var(--beige-light);
-    font-family: 'Quicksand', sans-serif;
-
+  font-family: 'Quicksand', sans-serif;
 }
 
-/* TITLE */
+/* ==================================================
+   TITLE
+================================================== */
 .courses-title {
-  font-size: 46px;
+  font-size: clamp(28px, 4vw, 46px);
   color: var(--pink);
   font-weight: 700;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
-/* SUBTITLE */
 .courses-sub {
-  font-size: 22px;
+  font-size: clamp(16px, 2.5vw, 22px);
   color: var(--text-dark);
-  margin-bottom: 50px;
+  margin-bottom: clamp(30px, 5vw, 50px);
 }
 
-/* GRID */
+/* ==================================================
+   GRID (AUTO RESPONSIVE)
+================================================== */
 .courses-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 40px;
-  margin-bottom: 50px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: clamp(20px, 4vw, 40px);
+  margin-bottom: clamp(30px, 5vw, 50px);
 }
 
-/* COURSE BOX */
+/* ==================================================
+   COURSE BOX
+================================================== */
 .course-box {
-  padding: 20px;
+  padding: clamp(14px, 2vw, 20px);
   text-align: center;
-  transition: 0.3s ease;
+  transition: transform 0.25s ease;
 }
 
 .course-box:hover {
   transform: translateY(-6px);
 }
 
-/* ICON */
+/* ==================================================
+   ICON
+================================================== */
 .course-icon {
-  width: 90px;
-  height: 90px;
+  width: clamp(56px, 6vw, 90px);
+  height: clamp(56px, 6vw, 90px);
   object-fit: contain;
-  margin-bottom: 15px;
+  margin-bottom: 14px;
   filter: drop-shadow(0px 2px 6px rgba(0,0,0,0.15));
 }
 
-/* TEXT */
+/* ==================================================
+   TEXT
+================================================== */
 .course-box h3 {
-  font-size: 20px;
+  font-size: clamp(15px, 2vw, 20px);
   font-weight: 600;
   color: var(--text-dark);
   margin-bottom: 6px;
@@ -69,57 +78,34 @@
 
 .course-box p {
   color: #555;
-  font-size: 15px;
+  font-size: clamp(13px, 1.8vw, 15px);
 }
 
-/* BUTTON */
+/* ==================================================
+   BUTTON
+================================================== */
 .courses-btn {
-  padding: 14px 36px;
-  font-size: 18px;
-  background: #ff4f88;
+  padding: clamp(12px, 2vw, 14px) clamp(26px, 4vw, 36px);
+  font-size: clamp(14px, 2vw, 18px);
+  background: var(--pink);
   color: var(--white);
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   font-weight: 600;
-  transition: 0.3s;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .courses-btn:hover {
-  background: #ff4f88;
   transform: translateY(-3px);
-} 
+  box-shadow: 0 6px 16px rgba(255, 79, 136, 0.35);
+}
 
-/* Mobile → ⭐ 2 per row (as you asked) */
+/* ==================================================
+   MOBILE – FORCE 2 PER ROW
+================================================== */
 @media (max-width: 540px) {
-
-  .courses-wrapper {
-    padding: 70px 25px;
-  }
-
-  .courses-title {
-    font-size: 34px;
-  }
-
-  .courses-sub {
-    font-size: 18px;
-  }
-
   .courses-grid {
-    grid-template-columns: repeat(2, 1fr); /* ⭐ MOBILE = 2 ITEMS */
-    gap: 20px;
-  }
-
-  .course-icon {
-    width: 65px;
-    height: 65px;
-  }
-
-  .course-box h3 {
-    font-size: 16px;
-  }
-
-  .course-box p {
-    font-size: 13px;
+    grid-template-columns: repeat(2, 1fr);
   }
 }

@@ -5,144 +5,117 @@
   --beige-light: #EBE8D8;
 }
 
-/* =============================
+/* ==================================================
    SECTION
-============================= */
+================================================== */
 .menu-section {
   width: 100%;
   text-align: center;
-  padding: 90px 60px 80px;
+  padding: clamp(50px, 8vw, 90px) clamp(20px, 6vw, 60px);
   background: var(--beige-light);
   font-family: 'Quicksand', sans-serif;
 }
 
 /* TITLE */
 .menu-title {
-  font-size: 48px;
+  font-size: clamp(28px, 4vw, 48px);
   color: var(--pink);
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .menu-sub {
-  font-size: 24px;
+  font-size: clamp(16px, 2.5vw, 24px);
   color: var(--text-dark);
-  margin-bottom: 70px;
+  margin-bottom: clamp(32px, 6vw, 70px);
 }
 
-/* =============================
-   DESKTOP — IMAGE 1 STYLE
-============================= */
+/* ==================================================
+   GRID (AUTO RESPONSIVE)
+================================================== */
 .menu-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: clamp(18px, 4vw, 40px);
 }
 
-/* CARD */
+/* ==================================================
+   CARD
+================================================== */
 .menu-card {
   background: var(--white);
-  padding: 20px;
+  padding: 16px;
   border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-  transition: 0.3s ease;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
   position: relative;
+  cursor: pointer;
 }
 
 .menu-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-8px);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.16);
 }
 
-/* ⭐ STARS ARC */
+/* ==================================================
+   ⭐ STARS (DESKTOP ONLY FEEL)
+================================================== */
 .stars {
   position: absolute;
-  top: -14px;
+  top: -12px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 6px;
+  gap: 5px;
   color: #FFD966;
-  font-size: 14px;
+  font-size: 13px;
 }
 
-/* IMAGE */
+/* ==================================================
+   IMAGE
+================================================== */
 .menu-img {
   width: 100%;
-  height: 260px;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
   border-radius: 18px;
 }
 
-/* NAME */
+/* ==================================================
+   NAME
+================================================== */
 .menu-name {
-  margin-top: 18px;
-  font-size: 20px;
+  margin-top: 16px;
+  font-size: clamp(14px, 2vw, 20px);
   font-weight: 600;
   letter-spacing: 1px;
   color: var(--text-dark);
 }
 
-/* =============================
-   TABLET
-============================= */
-@media (max-width: 1200px) {
-  .menu-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-@media (max-width: 900px) {
-  .menu-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* =============================
-   MOBILE — IMAGE 2 STYLE
-============================= */
+/* ==================================================
+   MOBILE OPTIMIZATION
+================================================== */
 @media (max-width: 600px) {
-
   .menu-section {
-    padding: 50px 20px;
     background: #fdecef;
   }
 
-  .menu-title {
-    font-size: 32px;
-  }
-
-  .menu-sub {
-    font-size: 18px;
-    margin-bottom: 40px;
-  }
-
-  /* 2 x 3 GRID */
-  .menu-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-  }
-
-  /* CARD — FLAT */
   .menu-card {
     padding: 10px;
     box-shadow: none;
+    border-radius: 16px;
   }
 
-  /* REMOVE STARS ON MOBILE */
+  .menu-card:hover {
+    transform: none;
+  }
+
   .stars {
     display: none;
   }
 
-  /* IMAGE */
-  .menu-img {
-    height: 165px;
-    border-radius: 16px;
-  }
-
-  /* NAME */
   .menu-name {
-    font-size: 14px;
     margin-top: 10px;
-    letter-spacing: 0.6px;
+    letter-spacing: 0.5px;
   }
 }
