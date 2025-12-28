@@ -4,7 +4,11 @@ import { FiHeart } from "react-icons/fi";
 import API from "../api";
 import { useNavigate } from "react-router-dom";
 
-const BACKEND_URL = "https://sweettooth-backend.onrender.com";
+/* ================= BACKEND URL ================= */
+// Best practice: env var (fallback included)
+const BACKEND_URL =
+  import.meta.env.VITE_BACKEND_URL ||
+  "https://sweettooth-backend.onrender.com";
 
 export default function IndiaLoves() {
   const [cakes, setCakes] = useState([]);
@@ -15,7 +19,7 @@ export default function IndiaLoves() {
   useEffect(() => {
     API.get("/products")
       .then((res) => setCakes(res.data))
-      .catch(console.error);
+      .catch((err) => console.error("Products error:", err));
   }, []);
 
   /* ================= FETCH WISHLIST ================= */
@@ -25,7 +29,7 @@ export default function IndiaLoves() {
         const ids = res.data.map((item) => item.productId);
         setWishlist(ids);
       })
-      .catch(console.error);
+      .catch((err) => console.error("Wishlist error:", err));
   }, []);
 
   /* ================= TOGGLE WISHLIST ================= */
@@ -48,6 +52,19 @@ export default function IndiaLoves() {
     }
   };
 
+  /* ================= IMAGE URL HANDLER ================= */
+  const getImageUrl = (cake) => {
+    const img = cake.images?.[0];
+
+    if (!img) return "/placeholder-cake.jpg"; // local fallback
+
+    // Cloudinary / external image
+    if (img.startsWith("http")) return img;
+
+    // Backend uploads
+    return `${BACKEND_URL}${img}`;
+  };
+
   return (
     <section className="india-loves">
       <h1 className="il-title">Best Bakes</h1>
@@ -64,10 +81,13 @@ export default function IndiaLoves() {
             {/* IMAGE */}
             <div className="il-img-box">
               <img
-                src={`${BACKEND_URL}${cake.images?.[0]}`}
+                src={getImageUrl(cake)}
                 alt={cake.title}
                 className="il-img"
                 loading="lazy"
+                onError={(e) => {
+                  e.target.src = "/placeholder-cake.jpg";
+                }}
               />
             </div>
 
