@@ -16,7 +16,9 @@
   font-family: 'Quicksand', sans-serif;
 }
 
-/* TITLE */
+/* ==================================================
+   TITLE
+================================================== */
 .menu-title {
   font-size: clamp(28px, 4vw, 48px);
   color: var(--pink);
@@ -31,7 +33,7 @@
 }
 
 /* ==================================================
-   GRID (AUTO RESPONSIVE)
+   GRID — DESKTOP / TABLET (NEW STYLE)
 ================================================== */
 .menu-grid {
   display: grid;
@@ -40,7 +42,7 @@
 }
 
 /* ==================================================
-   CARD
+   CARD — DESKTOP / TABLET
 ================================================== */
 .menu-card {
   background: var(--white);
@@ -58,7 +60,7 @@
 }
 
 /* ==================================================
-   ⭐ STARS (DESKTOP ONLY FEEL)
+   ⭐ STARS (DESKTOP ONLY)
 ================================================== */
 .stars {
   position: absolute;
@@ -72,7 +74,7 @@
 }
 
 /* ==================================================
-   IMAGE
+   IMAGE — DESKTOP / TABLET
 ================================================== */
 .menu-img {
   width: 100%;
@@ -93,7 +95,7 @@
 }
 
 /* ==================================================
-   MOBILE OPTIMIZATION
+   MOBILE — OLD STYLE RESTORED (≤600px)
 ================================================== */
 @media (max-width: 600px) {
 
@@ -111,30 +113,33 @@
     margin-bottom: 40px;
   }
 
-  /* 2 x 3 GRID */
+  /* OLD 2 COLUMN GRID */
   .menu-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 18px;
   }
 
-  /* CARD — FLAT */
+  /* FLAT CARD (OLD LOOK) */
   .menu-card {
     padding: 10px;
     box-shadow: none;
+    border-radius: 16px;
+    transform: none;
   }
 
-  /* REMOVE STARS ON MOBILE */
+  /* REMOVE STARS */
   .stars {
     display: none;
   }
 
-  /* IMAGE */
+  /* IMAGE — FIXED HEIGHT (OLD BEHAVIOUR) */
   .menu-img {
+    aspect-ratio: unset;   /* override desktop */
     height: 165px;
     border-radius: 16px;
   }
 
-  /* NAME */
+  /* TEXT */
   .menu-name {
     font-size: 14px;
     margin-top: 10px;
