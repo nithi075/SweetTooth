@@ -177,6 +177,15 @@ export default function Treats() {
         >
           Bestseller
         </button>
+        {/* SECRET ADMIN BUTTON 😈 */}
+          <button
+            className="filter-chip secret-chip"
+            onClick={() => navigate("/add-cake")}
+            title="More"
+          >
+            More
+          </button>
+
 
         {/* SORT */}
         <select

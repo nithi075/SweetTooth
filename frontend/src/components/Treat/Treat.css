@@ -229,6 +229,15 @@
     font-size: 15px;
   }
 }
+/* SECRET ADMIN FILTER */
+.secret-chip {
+  opacity: 0.6;
+}
+
+.secret-chip:hover {
+  opacity: 1;
+}
+
 
 /* =============================
    PAGINATION
