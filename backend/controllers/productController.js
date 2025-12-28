@@ -7,7 +7,6 @@ export const getProducts = async (req, res) => {
   try {
     const products = await Product.find();
 
-    // frontend compatibility
     const formatted = products.map((p) => ({
       ...p._doc,
       price: p.priceByKg?.["1"] || 0,
@@ -42,19 +41,19 @@ export const getSingleProduct = async (req, res) => {
 };
 
 /* =========================
-   CREATE PRODUCT (🔥 CLOUDINARY)
+   CREATE PRODUCT (LOCAL UPLOAD)
 ========================= */
 export const createProduct = async (req, res) => {
   try {
-    // 🔴 No images uploaded
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({ error: "No images uploaded" });
     }
 
-    // ✅ Cloudinary gives FULL URL in file.path
-    const imageUrls = req.files.map((file) => file.path);
+    // 🔥 LOCAL IMAGE PATHS
+    const imagePaths = req.files.map(
+      (file) => `/uploads/${file.filename}`
+    );
 
-    // 🔴 Parse priceByKg safely
     let priceByKg;
     try {
       priceByKg = JSON.parse(req.body.priceByKg);
@@ -67,7 +66,7 @@ export const createProduct = async (req, res) => {
       priceByKg,
       rating: Number(req.body.rating || 0),
       reviews: req.body.reviews || "",
-      images: imageUrls, // 🔥 FULL Cloudinary URLs
+      images: imagePaths,
       category: req.body.category,
       flavor: req.body.flavor,
       occasion: req.body.occasion,

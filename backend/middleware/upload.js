@@ -1,18 +1,30 @@
 import multer from "multer";
-import { CloudinaryStorage } from "multer-storage-cloudinary";
-import { v2 as cloudinary } from "cloudinary";
+import path from "path";
+import fs from "fs";
+import { fileURLToPath } from "url";
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const storage = new CloudinaryStorage({
-  cloudinary,
-  params: {
-    folder: "sweettooth/products",
-    allowed_formats: ["jpg", "jpeg", "png", "webp"],
+const uploadPath = path.join(__dirname, "../uploads");
+
+// uploads folder illa na create pannum
+if (!fs.existsSync(uploadPath)) {
+  fs.mkdirSync(uploadPath);
+}
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, uploadPath);
+  },
+  filename: (req, file, cb) => {
+    cb(
+      null,
+      Date.now() +
+        "-" +
+        Math.round(Math.random() * 1e9) +
+        path.extname(file.originalname)
+    );
   },
 });
 
