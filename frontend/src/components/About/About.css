@@ -1,0 +1,333 @@
+:root {
+  --pink: #ff4f88;
+  --text-dark: #333;
+  --beige-light: #f9f4e8;
+}
+
+/* MAIN WRAPPER */
+.about-section {
+  font-family: 'Quicksand', sans-serif;
+  width: 100%;
+  background: var(--beige-light);
+}
+
+/* --------------------------------------
+   HERO SECTION
+-------------------------------------- */
+.about-hero {
+  margin-top: 60px;
+  text-align: center;
+  padding: 120px 40px 90px;
+  background: linear-gradient(135deg, #ffe2ec, #ffd1e1);
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+}
+
+.about-hero h1 {
+  font-size: 52px;
+  color: var(--pink);
+  font-weight: 700;
+}
+
+.about-hero p {
+  font-size: 20px;
+  margin-top: 10px;
+  opacity: 0.8;
+}
+
+/* --------------------------------------
+   STORY SECTION
+-------------------------------------- */
+.about-container {
+  display: flex;
+  gap: 40px;
+  padding: 80px 120px;
+  align-items: center;
+}
+
+.about-image-box {
+  flex: 1;
+}
+
+.about-img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(255, 90, 140, 0.25);
+}
+
+.about-content {
+  flex: 1;
+}
+
+.about-content h2 {
+  font-size: 34px;
+  color: var(--pink);
+  margin-bottom: 15px;
+}
+
+.about-content p {
+  font-size: 17px;
+  margin-bottom: 12px;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+/* --------------------------------------
+   MISSION SECTION
+-------------------------------------- */
+.mission-section {
+  text-align: center;
+  padding: 90px 120px;
+  background: linear-gradient(135deg, #fff0f6, #ffe4ec);
+  border-radius: 40px;
+  margin:  auto;
+}
+
+.mission-section h2 {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--pink);
+  margin-bottom: 12px;
+}
+
+.mission-section p {
+  font-size: 18px;
+  opacity: 0.75;
+  max-width: 700px;
+  margin: 0 auto 50px auto;
+  line-height: 1.6;
+}
+
+/* CARDS */
+.mission-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 35px;
+}
+
+.mission-card {
+  padding: 35px 28px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 140, 170, 0.2);
+  box-shadow: 0 15px 35px rgba(255, 80, 130, 0.18);
+  transition: 0.35s ease;
+  text-align: center;
+  cursor: pointer;
+}
+
+.mission-card:hover {
+  transform: translateY(-10px) scale(1.03);
+}
+
+.mission-card img {
+  width: 70px;
+  margin-bottom: 14px;
+}
+
+.mission-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--pink);
+  margin-bottom: 10px;
+}
+
+.mission-card p {
+  font-size: 15px;
+  opacity: 0.75;
+  line-height: 1.4;
+}
+
+/* --------------------------------------
+   QUOTE SECTION
+-------------------------------------- */
+.about-quote {
+  margin-top: 60px;
+  padding: 40px 20px 80px;
+  text-align: center;
+}
+
+.about-quote p {
+  font-size: 26px;
+  font-style: italic;
+  color: var(--pink);
+}
+
+/* --------------------------------------
+   RESPONSIVE BREAKPOINTS
+-------------------------------------- */
+
+/* Large Tablets */
+@media (max-width: 1100px) {
+  .about-container {
+    padding: 60px 60px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-content h2 {
+    font-size: 30px;
+  }
+
+  .mission-section {
+    padding: 70px 60px;
+  }
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+  .mission-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-hero h1 {
+    font-size: 44px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .about-hero {
+    padding: 90px 20px 60px;
+  }
+
+  .about-hero h1 {
+    font-size: 34px;
+  }
+
+  .about-hero p {
+    font-size: 17px;
+  }
+
+  .about-container {
+    padding: 40px 20px;
+  }
+  
+
+  .about-content h2 {
+    font-size: 28px;
+  }
+
+  .mission-section {
+    padding: 50px 20px;
+  }
+
+  .mission-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .about-quote p {
+    font-size: 22px;
+  }
+}
+
+/* Extra Small */
+@media (max-width: 400px) {
+  .about-hero h1 {
+    font-size: 30px;
+  }
+
+  .mission-section h2 {
+    font-size: 30px;
+  }
+}/* ===============================
+   ABOUT – REVIEWS SECTION
+=============================== */
+
+.about-reviews {
+  margin-top: 80px;
+  padding: 0 40px;
+}
+
+.about-review-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.view-all-reviews {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.view-reviews-btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background: #ff4f88;
+  color: #fff;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.view-reviews-btn:hover {
+  background: #ff2f70;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(255, 79, 136, 0.35);
+}
+
+/* ===============================
+   TABLET RESPONSIVE
+=============================== */
+@media (max-width: 900px) {
+  .about-reviews {
+    margin-top: 60px;
+    padding: 0 28px;
+  }
+
+  .about-review-title {
+    font-size: 26px;
+    margin-bottom: 22px;
+  }
+
+  .view-reviews-btn {
+    padding: 11px 26px;
+    font-size: 14px;
+  }
+}
+
+/* ===============================
+   MOBILE RESPONSIVE
+=============================== */
+@media (max-width: 600px) {
+  .about-reviews {
+    margin-top: 50px;
+    padding: 0 16px;
+  }
+
+  .about-review-title {
+    font-size: 22px;
+    margin-bottom: 18px;
+  }
+
+  .view-all-reviews {
+    margin-top: 20px;
+  }
+
+  .view-reviews-btn {
+    width: 100%;
+    max-width: 320px;
+    padding: 12px 0;
+    font-size: 14px;
+    border-radius: 24px;
+  }
+}
+
+/* ===============================
+   VERY SMALL PHONES
+=============================== */
+@media (max-width: 380px) {
+  .about-review-title {
+    font-size: 20px;
+  }
+
+  .view-reviews-btn {
+    font-size: 13px;
+    padding: 10px 0;
+  }
+}

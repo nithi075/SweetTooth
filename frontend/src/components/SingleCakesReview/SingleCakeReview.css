@@ -1,0 +1,271 @@
+:root {
+  --pink: #ff4f88;
+  --dark: #2b2b2b;
+  --light: #f9f4e8;
+  --card-bg: #ffffff;
+  --star: #ffb800;
+  --success: #28d27a;
+}
+
+/* ===============================
+   MAIN SECTION
+=============================== */
+.cake-review-section {
+  padding: 60px 110px;
+  background: var(--light);
+  font-family: "Quicksand", sans-serif;
+}
+
+/* ===============================
+   REVIEW SUMMARY
+=============================== */
+.review-summary {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.review-summary h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--pink);
+}
+
+.big-rating {
+  font-size: 42px;
+  font-weight: 700;
+  margin: 8px 0;
+}
+
+.stars .star-icon {
+  color: var(--star);
+  font-size: 22px;
+  margin: 0 3px;
+}
+
+.review-summary p {
+  opacity: 0.65;
+  font-size: 14px;
+}
+
+/* ===============================
+   REVIEW IMAGE STRIP
+=============================== */
+.review-gallery {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin: 24px auto 42px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.review-gallery::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-img {
+  width: 62px;
+  height: 62px;
+  border-radius: 14px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* ===============================
+   REVIEW CARDS GRID
+=============================== */
+.review-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 32px;
+}
+
+/* CARD */
+.review-card {
+  display: flex;
+  gap: 18px;
+  background: var(--card-bg);
+  padding: 22px;
+  border-radius: 20px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* IMAGE */
+.review-user-img {
+  width: 140px;
+  height: 140px;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+/* CONTENT */
+.review-content-box {
+  flex: 1;
+}
+
+.rating-row .star-icon {
+  color: var(--star);
+  font-size: 18px;
+  margin-right: 3px;
+}
+
+.review-text {
+  font-size: 15px;
+  color: #444;
+  line-height: 1.55;
+  margin: 10px 0 14px;
+}
+
+.review-user-details h4 {
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.verified-icon {
+  color: var(--success);
+}
+
+.small-details {
+  font-size: 13px;
+  opacity: 0.65;
+}
+
+/* ===============================
+   WRITE REVIEW BOX
+=============================== */
+.write-review-box {
+  margin-top: 60px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.write-review-box h3 {
+  font-size: 22px;
+  margin-bottom: 18px;
+}
+
+.write-review-box input,
+.write-review-box textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  margin-bottom: 14px;
+  font-size: 15px;
+  background: #fafafa;
+}
+
+textarea {
+  height: 120px;
+  resize: none;
+}
+
+/* STAR SELECT */
+.rating-select {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.star-select {
+  font-size: 22px;
+  cursor: pointer;
+  color: #ccc;
+  transition: transform 0.2s;
+}
+
+.star-select:hover {
+  transform: scale(1.15);
+}
+
+.star-select.filled {
+  color: var(--star);
+}
+
+/* IMAGE PREVIEW */
+.upload-preview {
+  width: 120px;
+  height: 120px;
+  border-radius: 14px;
+  object-fit: cover;
+  margin-bottom: 16px;
+}
+
+/* BUTTON */
+.submit-review-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #ff5f8a, #ff2f70);
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.submit-review-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(255, 79, 136, 0.35);
+}
+
+/* ===============================
+   MOBILE — SWIGGY STYLE SLIDER
+=============================== */
+@media (max-width: 600px) {
+  .cake-review-section {
+    padding: 32px 18px;
+  }
+
+  .review-cards {
+    display: flex;
+    overflow-x: auto;
+    gap: 16px;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 10px;
+  }
+
+  .review-cards::-webkit-scrollbar {
+    display: none;
+  }
+
+  .review-card {
+    flex: 0 0 240px;
+    scroll-snap-align: start;
+    padding: 16px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .review-user-img {
+    width: 180px;
+    height: 180px;
+  }
+
+  .review-text {
+    font-size: 14px;
+  }
+}
+
+/* EXTRA SMALL */
+@media (max-width: 380px) {
+  .review-card {
+    flex: 0 0 200px;
+  }
+
+  .review-user-img {
+    width: 150px;
+    height: 150px;
+  }
+}

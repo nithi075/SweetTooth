@@ -1,0 +1,192 @@
+/* -----------------------------------------
+   OVERLAY
+------------------------------------------*/
+.reel-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  backdrop-filter: blur(6px);
+  animation: fadeBg 0.3s ease;
+}
+
+@keyframes fadeBg {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* -----------------------------------------
+   MODAL WRAPPER
+------------------------------------------*/
+.reel-modal {
+  position: relative;
+  width: 430px;
+  max-width: 95%;
+  animation: popUp 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@keyframes popUp {
+  from { transform: scale(0.6); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* -----------------------------------------
+   VIDEO BOX (9:16)
+------------------------------------------*/
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  background: #000;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(255, 90, 130, 0.45);
+}
+
+.reel-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* -----------------------------------------
+   CLOSE BUTTON
+------------------------------------------*/
+.close-btn {
+  position: absolute;
+  top: -55px;
+  right: 0px;
+  background: #fff;
+  color: #333;
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 5px 20px rgba(255, 105, 130, 0.4);
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.close-btn:hover {
+  background: var(--pink);
+  color: #fff;
+  transform: scale(1.15);
+}
+
+/* -----------------------------------------
+   ARROWS
+------------------------------------------*/
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.75);
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.25s;
+}
+
+.arrow:hover {
+  background: var(--pink);
+  color: #fff;
+}
+
+.arrow.left { left: -60px; }
+.arrow.right { right: -60px; }
+
+/* -----------------------------------------
+   CAPTION
+------------------------------------------*/
+.caption {
+  color: #fff;
+  margin-top: 15px;
+  font-size: 16px;
+  text-align: center;
+  opacity: 0.9;
+  line-height: 1.4;
+  max-width: 90%;
+}
+
+/* -----------------------------------------
+   RESPONSIVE FIXES
+------------------------------------------*/
+
+/* Tablets */
+@media (max-width: 900px) {
+  .arrow.left { left: -45px; }
+  .arrow.right { right: -45px; }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .reel-modal {
+    width: 350px;
+  }
+
+  .arrow {
+    width: 38px;
+    height: 38px;
+    font-size: 18px;
+  }
+
+  /* move outside arrows into top-center region */
+  .arrow.left {
+    left: 10px;
+    top: 48%;
+  }
+
+  .arrow.right {
+    right: 10px;
+    top: 48%;
+  }
+
+  .close-btn {
+    top: -45px;
+    right: -5px;
+  }
+
+  .caption {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 400px) {
+  .reel-modal {
+    width: 300px;
+  }
+
+  .arrow {
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+  }
+
+  .close-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+  }
+
+  .caption {
+    font-size: 13px;
+  }
+}

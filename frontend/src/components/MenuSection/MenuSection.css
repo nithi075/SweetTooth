@@ -1,0 +1,148 @@
+:root {
+  --pink: #F28BA8;
+  --white: #FFFFFF;
+  --text-dark: #333333;
+  --beige-light: #EBE8D8;
+}
+
+/* =============================
+   SECTION
+============================= */
+.menu-section {
+  width: 100%;
+  text-align: center;
+  padding: 90px 60px 80px;
+  background: var(--beige-light);
+  font-family: 'Quicksand', sans-serif;
+}
+
+/* TITLE */
+.menu-title {
+  font-size: 48px;
+  color: var(--pink);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.menu-sub {
+  font-size: 24px;
+  color: var(--text-dark);
+  margin-bottom: 70px;
+}
+
+/* =============================
+   DESKTOP — IMAGE 1 STYLE
+============================= */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 40px;
+}
+
+/* CARD */
+.menu-card {
+  background: var(--white);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  transition: 0.3s ease;
+  position: relative;
+}
+
+.menu-card:hover {
+  transform: translateY(-10px);
+}
+
+/* ⭐ STARS ARC */
+.stars {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  color: #FFD966;
+  font-size: 14px;
+}
+
+/* IMAGE */
+.menu-img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 18px;
+}
+
+/* NAME */
+.menu-name {
+  margin-top: 18px;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--text-dark);
+}
+
+/* =============================
+   TABLET
+============================= */
+@media (max-width: 1200px) {
+  .menu-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .menu-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* =============================
+   MOBILE — IMAGE 2 STYLE
+============================= */
+@media (max-width: 600px) {
+
+  .menu-section {
+    padding: 50px 20px;
+    background: #fdecef;
+  }
+
+  .menu-title {
+    font-size: 32px;
+  }
+
+  .menu-sub {
+    font-size: 18px;
+    margin-bottom: 40px;
+  }
+
+  /* 2 x 3 GRID */
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  /* CARD — FLAT */
+  .menu-card {
+    padding: 10px;
+    box-shadow: none;
+  }
+
+  /* REMOVE STARS ON MOBILE */
+  .stars {
+    display: none;
+  }
+
+  /* IMAGE */
+  .menu-img {
+    height: 165px;
+    border-radius: 16px;
+  }
+
+  /* NAME */
+  .menu-name {
+    font-size: 14px;
+    margin-top: 10px;
+    letter-spacing: 0.6px;
+  }
+}

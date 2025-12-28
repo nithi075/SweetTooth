@@ -1,0 +1,70 @@
+.checkout {
+  max-width: 420px;
+  margin: 0 auto;              /* ❌ top margin remove */
+  padding: 25px;
+  padding-top: 120px;          /* ✅ FIX: header height space */
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  font-family: "Poppins", sans-serif;
+}
+
+/* TITLE */
+.checkout h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* INPUTS */
+.checkout input,
+.checkout textarea {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.checkout textarea {
+  resize: none;
+  height: 90px;
+}
+
+.checkout input:focus,
+.checkout textarea:focus {
+  border-color: #ff6b81;
+  box-shadow: 0 0 0 2px rgba(255, 107, 129, 0.15);
+}
+
+/* PLACE ORDER BUTTON */
+.place-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #ff6b81, #ff4757);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+.place-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(255, 71, 87, 0.35);
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+  .checkout {
+    padding-top: 100px;        /* ✅ mobile header height */
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}

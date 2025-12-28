@@ -1,0 +1,326 @@
+/* --------------------------------------------------
+   MAIN HEADER (Desktop)
+-------------------------------------------------- */
+.simple-header {
+  width: 100%;
+  background: var(--white);
+  padding: 16px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--beige);
+  font-family: 'Quicksand', sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  backdrop-filter: blur(12px);
+  transition: padding 0.25s ease;
+}
+
+/* --------------------------------------------------
+   LOGO 
+-------------------------------------------------- */
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header-logo {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.logo-text h2 {
+  font-size: 25px;
+  margin: 0;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.logo-text span {
+  font-size: 14px;
+  color: var(--pink);
+  letter-spacing: 0.5px;
+}
+
+/* --------------------------------------------------
+   NAVIGATION MENU
+-------------------------------------------------- */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  font-size: 19px;
+  color: var(--text-dark);
+  position: relative;
+  padding: 6px 0;
+  transition: 0.3s ease;
+  font-weight: 500;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+  color: var(--pink);
+}
+
+/* Underline animation */
+.nav-menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 2px;
+  width: 0%;
+  background: var(--pink);
+  transition: width 0.3s ease;
+}
+
+.nav-menu a:hover::after,
+.nav-menu a.active::after {
+  width: 100%;
+}
+
+/* --------------------------------------------------
+   HAMBURGER (Mobile Only)
+-------------------------------------------------- */
+.hamburger {
+  display: none;
+  font-size: 32px;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.hamburger:active {
+  transform: scale(0.85);
+}
+
+/* --------------------------------------------------
+   MOBILE NAV SLIDE PANEL
+-------------------------------------------------- */
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  right: -300px; /* hidden by default */
+  width: 300px;
+  height: 100vh;
+  background: var(--white);
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+  padding: 32px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  transition: right 0.35s ease;
+  z-index: 99999;
+  border-left: 1px solid #f2f2f2;
+}
+
+.mobile-nav.open {
+  right: 0;
+}
+
+.mobile-nav a {
+  text-decoration: none;
+  font-size: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  color: var(--text-dark);
+  transition: 0.25s;
+  font-weight: 600;
+}
+
+.mobile-nav a:hover {
+  color: var(--pink);
+  padding-left: 6px;
+}
+
+/* Close button */
+.mobile-close {
+  margin-left: auto;
+  font-size: 34px;
+  cursor: pointer;
+  color: var(--text-dark);
+  margin-bottom: 18px;
+}
+
+/* --------------------------------------------------
+   SCREEN OVERLAY
+-------------------------------------------------- */
+.mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 9999;
+}
+
+.mobile-overlay.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* --------------------------------------------------
+   RESPONSIVE BREAKPOINTS
+-------------------------------------------------- */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .simple-header {
+    padding: 14px 32px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .header-logo {
+    width: 48px;
+    height: 48px;
+  }
+
+  .logo-text h2 {
+    font-size: 20px;
+  }
+
+  .simple-header {
+    padding: 14px 20px;
+  }
+
+  .mobile-nav {
+    width: 260px;
+  }
+}
+
+/* Extra Small (phones) */
+@media (max-width: 480px) {
+  .header-logo {
+    width: 42px;
+    height: 42px;
+  }
+
+  .logo-text h2 {
+    font-size: 18px;
+  }
+
+  .mobile-nav {
+    width: 230px;
+  }
+}
+
+/* Desktop underline animation + active bar */
+.nav-menu a {
+  position: relative;
+}
+
+.nav-menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 3px;
+  width: 0%;
+  background: var(--pink);
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+.nav-menu a:hover::after,
+.nav-menu a.active::after {
+  width: 100%;
+}
+/* Mobile: Active link highlight (Pink Left Bar) */
+.mobile-nav a.active {
+  color: var(--pink);
+  font-weight: 700;
+  padding-left: 14px;
+  border-left: 4px solid var(--pink);
+  background: rgba(255, 79, 136, 0.08); /* optional soft pink bg */
+}
+.mobile-nav a.active {
+  border-bottom: none;
+}
+/* LOGO LINK – REMOVE UNDERLINE */
+.logo-section {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* EVEN WHEN ACTIVE / VISITED */
+.logo-section:visited,
+.logo-section:hover,
+.logo-section:active {
+  text-decoration: none;
+  color: inherit;
+}
+/* ICON GROUPS */
+.cart-icon-desktop,
+.wishlist-icon-desktop,
+.mobile-cart,
+.mobile-wishlist {
+  position: relative;
+  cursor: pointer;
+}
+
+/* SPACE BETWEEN ICONS (DESKTOP) */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* MOBILE ICON ROW */
+.mobile-icons {
+  display: none;
+  align-items: center;
+  gap: 14px;
+}
+
+/* BADGE */
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background: var(--pink);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none;
+  }
+
+  .mobile-icons {
+    display: flex;
+  }
+}

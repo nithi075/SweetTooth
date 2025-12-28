@@ -1,0 +1,238 @@
+:root {
+  --pink: #ff3f7f;
+  --dark: #2b2b2b;
+  --beige-light: #EBE8D8; /* unified footer background */
+}
+
+/* -------------------------
+      FOOTER BASE
+-------------------------- */
+.footer {
+  background: var(--beige-light);
+  padding: 90px 40px 30px;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Quicksand', sans-serif;
+  text-align: center;
+}
+
+/* WAVE BG */
+.footer-wave {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  background: url("/src/assets/wave-footer.svg");
+  background-size: cover;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* MAIN CONTAINER */
+.footer-container {
+  background: var(--beige-light); /* ensures perfect color continuity */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 45px;
+  max-width: 900px;
+  margin: auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* BRAND LOGO */
+.footer-cupcake {
+  width: 70px;
+  margin-bottom: 12px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+.footer-logo {
+  font-size: 30px;
+  color: var(--pink);
+  font-weight: 700;
+}
+
+.footer-text {
+  font-size: 15px;
+  opacity: 0.8;
+  max-width: 420px;
+  margin: 10px auto 0;
+}
+
+/* ROW: CONTACT + SOCIAL */
+.footer-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 90px;
+  flex-wrap: wrap;
+  width: 100%;
+  background: transparent; /* keeps background consistent */
+}
+
+/* TITLES */
+.footer-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--pink);
+  margin-bottom: 12px;
+}
+
+/* CONTACT ITEMS */
+.footer-contact {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0;
+  opacity: 0.9;
+  justify-content: center;
+}
+
+/* SOCIAL ICONS */
+.footer-social {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.footer-social a {
+  font-size: 20px;
+  color: #fff;
+  background: var(--pink);
+  width: 42px;
+  height: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  transition: 0.3s;
+  box-shadow: 0 8px 18px rgba(255, 64, 120, 0.25);
+}
+
+.footer-social a:hover {
+  transform: translateY(-6px);
+  background: #fff;
+  color: var(--pink);
+  box-shadow: 0 12px 26px rgba(255, 64, 120, 0.35);
+}
+
+/* COPYRIGHT */
+.footer-bottom {
+  margin-top: 45px;
+  opacity: 0.7;
+  font-size: 14px;
+  padding-top: 20px;
+  border-top: 1px solid #ffc1d5;
+  background: var(--beige-light); /* consistent color */
+}
+
+/* -------------------------
+      RESPONSIVE 
+-------------------------- */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .footer {
+    padding: 80px 30px 30px;
+  }
+
+  .footer-row {
+    gap: 50px;
+  }
+
+  .footer-logo {
+    font-size: 26px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .footer {
+    padding: 70px 25px 30px;
+  }
+
+  .footer-text {
+    font-size: 14px;
+    max-width: 360px;
+  }
+
+  /* CONTACT + FOLLOW same row */
+  .footer-row {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    text-align: left;
+    flex-wrap: nowrap;
+  }
+
+  .footer-title {
+    font-size: 18px;
+    text-align: left;
+  }
+
+  .footer-social a {
+    width: 38px;
+    height: 38px;
+    font-size: 18px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .footer {
+    padding: 60px 20px 25px;
+  }
+
+  .footer-logo {
+    font-size: 24px;
+  }
+
+  .footer-cupcake {
+    width: 60px;
+  }
+
+  .footer-social {
+    gap: 12px;
+  }
+
+  .footer-social a {
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+  }
+
+  .footer-contact {
+    font-size: 14px;
+  }
+
+  .footer-bottom {
+    font-size: 13px;
+  }
+}
+
+/* Extra Small */
+@media (max-width: 360px) {
+  .footer-logo {
+    font-size: 20px;
+  }
+
+  .footer-text {
+    font-size: 13px;
+  }
+
+  .footer-social a {
+    width: 32px;
+    height: 32px;
+    font-size: 15px;
+  }
+}

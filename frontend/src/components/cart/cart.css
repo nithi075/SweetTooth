@@ -1,0 +1,240 @@
+:root {
+  --pink: #ff4f88;
+  --white: #ffffff;
+  --text-dark: #282c3f;
+  --text-light: #686b78;
+  --border-light: #e9e9eb;
+  --bg-light: #faf7f2;
+  --shadow-soft: 0 4px 14px rgba(0,0,0,0.08);
+
+  /* 🔥 Sticky Header Height */
+  --header-height: 90px;
+}
+
+/* =============================
+   PAGE
+============================= */
+.cart-section {
+  background: var(--bg-light);
+  font-family: "Quicksand", sans-serif;
+
+  padding: 14px;
+  padding-top: calc(var(--header-height) + 18px); /* ✅ HEADER FIX */
+  padding-bottom: 120px; /* checkout bar safe */
+}
+
+/* =============================
+   TITLE
+============================= */
+.cart-title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: var(--text-dark);
+}
+
+/* =============================
+   CART CARD
+============================= */
+.cart-card {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  gap: 14px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+}
+
+.cart-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.cart-info {
+  flex: 1;
+}
+
+.cart-info h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+}
+
+.cart-price {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--pink);
+  margin-bottom: 8px;
+}
+
+/* =============================
+   QTY CONTROL
+============================= */
+.qty-row {
+  display: inline-flex;
+  align-items: center;
+  border: 1.5px solid var(--pink);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.qty-row button {
+  width: 30px;
+  height: 28px;
+  border: none;
+  background: #fff0f5;
+  color: var(--pink);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.qty-row span {
+  width: 30px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* =============================
+   CAKE MESSAGE
+============================= */
+.message-row {
+  font-size: 12.5px;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.edit-icon {
+  font-size: 14px;
+  color: var(--pink);
+  cursor: pointer;
+}
+
+/* =============================
+   DELETE ICON
+============================= */
+.delete-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  color: #aaa;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.delete-icon:hover {
+  color: #ff3b3b;
+}
+
+/* =============================
+   BILL BOX
+============================= */
+.bill-box {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 16px;
+  margin-top: 18px;
+  box-shadow: var(--shadow-soft);
+}
+
+.bill-box h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.bill-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.bill-row.grand {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.free {
+  color: green;
+  font-weight: 700;
+}
+
+/* =============================
+   PROCEED BUTTON
+============================= */
+.proceed-btn {
+  width: 100%;
+  margin-top: 14px;
+  background: linear-gradient(135deg, #ff6b81, #ff4f88);
+  color: var(--white);
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.proceed-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(255,79,136,0.35);
+}
+
+/* =============================
+   EMPTY CART
+============================= */
+.empty-cart-box {
+  background: var(--white);
+  border-radius: 18px;
+  padding: 32px 20px;
+  text-align: center;
+  margin-top: 40px;
+  box-shadow: var(--shadow-soft);
+}
+
+.empty-cart-img {
+  width: 130px;
+  margin-bottom: 16px;
+}
+
+.shop-now-btn {
+  margin-top: 14px;
+  background: var(--pink);
+  color: var(--white);
+  border: none;
+  padding: 12px 26px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.shop-now-btn:hover {
+  background: #ff2f70;
+}
+
+/* =============================
+   DESKTOP VIEW
+============================= */
+@media (min-width: 1024px) {
+  .cart-section {
+    max-width: 900px;
+    margin: auto;
+    padding-top: calc(var(--header-height) + 30px);
+    padding-bottom: 40px;
+  }
+}

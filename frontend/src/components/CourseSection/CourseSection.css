@@ -1,0 +1,125 @@
+:root {
+  --pink: #ff4f88;
+  --white: #ffffff;
+  --text-dark: #333;
+  --beige-light: #EBE8D8;
+}
+
+
+/* MAIN WRAPPER */
+.courses-wrapper {
+  width: 100%;
+  text-align: center;
+  padding: 100px 60px;
+  background: var(--beige-light);
+    font-family: 'Quicksand', sans-serif;
+
+}
+
+/* TITLE */
+.courses-title {
+  font-size: 46px;
+  color: var(--pink);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* SUBTITLE */
+.courses-sub {
+  font-size: 22px;
+  color: var(--text-dark);
+  margin-bottom: 50px;
+}
+
+/* GRID */
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+/* COURSE BOX */
+.course-box {
+  padding: 20px;
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.course-box:hover {
+  transform: translateY(-6px);
+}
+
+/* ICON */
+.course-icon {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  margin-bottom: 15px;
+  filter: drop-shadow(0px 2px 6px rgba(0,0,0,0.15));
+}
+
+/* TEXT */
+.course-box h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+
+.course-box p {
+  color: #555;
+  font-size: 15px;
+}
+
+/* BUTTON */
+.courses-btn {
+  padding: 14px 36px;
+  font-size: 18px;
+  background: #ff4f88;
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.courses-btn:hover {
+  background: #ff4f88;
+  transform: translateY(-3px);
+} 
+
+/* Mobile → ⭐ 2 per row (as you asked) */
+@media (max-width: 540px) {
+
+  .courses-wrapper {
+    padding: 70px 25px;
+  }
+
+  .courses-title {
+    font-size: 34px;
+  }
+
+  .courses-sub {
+    font-size: 18px;
+  }
+
+  .courses-grid {
+    grid-template-columns: repeat(2, 1fr); /* ⭐ MOBILE = 2 ITEMS */
+    gap: 20px;
+  }
+
+  .course-icon {
+    width: 65px;
+    height: 65px;
+  }
+
+  .course-box h3 {
+    font-size: 16px;
+  }
+
+  .course-box p {
+    font-size: 13px;
+  }
+}

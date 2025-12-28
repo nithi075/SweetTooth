@@ -1,0 +1,128 @@
+/* =============================
+   WISHLIST SECTION
+============================= */
+.wishlist-section {
+    
+  margin-top: 70px;
+  min-height: 100vh;
+  background: var(--bg-light);
+  padding-bottom: 40px;
+  font-family: 'Quicksand', sans-serif;
+}
+
+/* TITLE */
+.wishlist-title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-dark);
+  padding: 12px 16px;
+}
+
+/* =============================
+   EMPTY STATE
+============================= */
+.wishlist-empty {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--text-light);
+}
+
+.wishlist-empty img {
+  width: 140px;
+  margin-bottom: 16px;
+  opacity: 0.85;
+}
+
+.wishlist-empty p {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--text-dark);
+}
+
+.wishlist-empty span {
+  font-size: 13px;
+}
+
+/* =============================
+   GRID (REUSE TREATS GRID)
+============================= */
+.wishlist-grid {
+  padding-top: 8px;
+}
+
+/* =============================
+   HEART ALWAYS ACTIVE
+============================= */
+.wishlist-grid .heart-icon {
+  color: var(--pink);
+}
+
+/* =============================
+   REMOVE ANIMATION (OPTIONAL)
+============================= */
+.wishlist-grid .treat-card {
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.wishlist-grid .treat-card:active {
+  transform: scale(0.97);
+}
+
+/* =============================
+   IPAD
+============================= */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .wishlist-title {
+    font-size: 22px;
+    padding: 16px 40px;
+  }
+
+  .wishlist-grid {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+/* =============================
+   DESKTOP
+============================= */
+@media (min-width: 1024px) {
+  .wishlist-title {
+    font-size: 26px;
+    padding: 20px 120px;
+  }
+
+  .wishlist-grid {
+    padding-left: 120px;
+    padding-right: 120px;
+  }
+
+  .wishlist-empty img {
+    width: 180px;
+  }
+
+  .wishlist-empty p {
+    font-size: 18px;
+  }
+}
+.wishlist-loading {
+  padding: 60px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+/* EMPTY IMAGE CONTAINER */
+.wishlist-empty-img {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}

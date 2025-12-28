@@ -1,0 +1,269 @@
+:root {
+  --pink: #ff4f88;
+  --white: #ffffff;
+  --text-dark: #282c3f;
+  --text-light: #686b78;
+  --bg-light: #f6f4ee;
+  --border-light: #e9e9eb;
+  --shadow-soft: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+/* =============================
+   SECTION
+============================= */
+.treats-section {
+  margin-top: calc(var(--header-height) + 0.5px);
+  width: 100%;
+  padding: 16px 0;
+  background: var(--bg-light);
+  font-family: 'Quicksand', sans-serif;
+}
+
+
+.treats-title {
+  padding: 0 16px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+
+/* =============================
+   FILTER BAR
+============================= */
+.filter-bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--bg-light);
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.filter-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-chip,
+.sort-btn {
+  padding: 6px 12px;
+  border-radius: 18px;
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-dark);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.filter-chip.active {
+  border-color: var(--pink);
+  color: var(--pink);
+  background: #fff0f5;
+}
+
+/* =============================
+   GRID
+============================= */
+.treats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 12px;
+}
+
+/* =============================
+   CARD
+============================= */
+.treat-card {
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* IMAGE */
+.card-img-box {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.treat-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* BADGE */
+.badge {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  background: #ffe4ec;
+  color: var(--pink);
+  font-size: 10.5px;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+/* CONTENT */
+.card-content {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.cake-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.3;
+  margin-bottom: 6px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.price-heart-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price {
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+.heart-icon {
+  font-size: 18px;
+  color: #b5b5b5;
+}
+
+.heart-icon.active {
+  color: var(--pink);
+}
+
+/* =============================
+   EXTRA SMALL
+============================= */
+@media (max-width: 360px) {
+  .treats-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+/* =============================
+   IPAD (FIXED)
+============================= */
+@media (min-width: 768px) and (max-width: 1023px) {
+
+  .treats-title {
+    padding: 0 40px;
+    font-size: 22px;
+  }
+
+  .filter-bar {
+    padding: 14px 40px;
+  }
+
+  .treats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 20px 40px;
+    gap: 20px;
+  }
+
+  .cake-name {
+    font-size: 14.5px;
+  }
+
+  .price {
+    font-size: 14.5px;
+  }
+}
+
+/* =============================
+   DESKTOP (FIXED)
+============================= */
+@media (min-width: 1024px) {
+
+  .treats-title {
+    font-size: 26px;
+    padding: 0 120px;
+  }
+
+  .filter-bar {
+    padding: 18px 120px;
+  }
+
+  .filter-chip {
+    font-size: 14px;
+    padding: 10px 16px;
+  }
+
+  .treats-grid {
+    grid-template-columns: repeat(4, 1fr);
+    padding: 24px 120px;
+    gap: 28px;
+  }
+
+  .cake-name {
+    font-size: 15px;
+  }
+
+  .price {
+    font-size: 15px;
+  }
+}
+
+/* =============================
+   PAGINATION
+============================= */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px 0 24px;
+}
+
+.pagination button {
+  min-width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid var(--border-light);
+  background: var(--white);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background: var(--pink);
+  color: var(--white);
+  border-color: var(--pink);
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .treats-section {
+    margin-top: 60px;
+  }
+}

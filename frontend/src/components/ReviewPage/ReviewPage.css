@@ -1,0 +1,223 @@
+:root {
+  --pink: #ff4f88;
+  --star: #ffb400;       /* golden */
+  --star-dull: #d6d6d6;
+  --bg: #f9f4e8;
+  --text: #333;
+}
+
+/* ===============================
+   PAGE WRAPPER
+=============================== */
+.review-page {
+  padding: 110px 16px 60px;
+  max-width: 900px;
+  margin: auto;
+  font-family: "Poppins", sans-serif;
+  color: var(--text);
+}
+
+/* ===============================
+   TITLE
+=============================== */
+.page-title {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+/* ===============================
+   WRITE REVIEW BOX
+=============================== */
+.write-review-box {
+  background: #fff;
+  padding: 28px;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  margin-bottom: 55px;
+}
+
+.write-review-box h3 {
+  font-size: 22px;
+  margin-bottom: 18px;
+}
+
+/* INPUTS */
+.write-review-box input,
+.write-review-box textarea {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  font-size: 15px;
+  background: #fafafa;
+}
+
+.write-review-box textarea {
+  min-height: 110px;
+  resize: none;
+}
+
+/* ===============================
+   STAR SELECT (WRITE REVIEW)
+=============================== */
+.rating-select {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.rating-select .star {
+  font-size: 26px;
+  color: var(--star-dull);
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.rating-select .star.filled {
+  color: var(--star);
+}
+
+.rating-select .star:hover {
+  color: var(--star);
+  transform: scale(1.2);
+}
+
+/* ===============================
+   SUBMIT BUTTON
+=============================== */
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background: var(--pink);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.submit-btn:hover {
+  background: #ff2f70;
+  transform: translateY(-1px);
+}
+
+/* ===============================
+   REVIEW LIST
+=============================== */
+.review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* REVIEW CARD */
+.review-item {
+  background: #fff;
+  padding: 22px;
+  border-radius: 18px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.1);
+  transition: 0.25s ease;
+}
+
+.review-item:hover {
+  transform: translateY(-4px);
+}
+
+/* NAME */
+.review-item h4 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+/* ===============================
+   STAR COUNT (DISPLAY ONLY)
+=============================== */
+.review-item .rating-row {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.review-item .rating-row .star {
+  font-size: 18px;
+  color: var(--star);
+  cursor: default;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.15));
+}
+
+/* TEXT */
+.review-item p {
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+/* ===============================
+   STATES
+=============================== */
+.center {
+  text-align: center;
+  opacity: 0.75;
+  font-size: 15px;
+  margin-top: 30px;
+}
+
+/* ===============================
+   MOBILE OPTIMIZATION
+=============================== */
+@media (max-width: 600px) {
+  .page-title {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+
+  .write-review-box {
+    padding: 22px;
+  }
+  .review-title {
+    font-size: 35px;
+  }
+
+  .write-review-box h3 {
+    font-size: 20px;
+  }
+
+  .rating-select .star {
+    font-size: 24px;
+  }
+
+  .review-item {
+    padding: 18px;
+  }
+
+  .review-item h4 {
+    font-size: 15px;
+  }
+
+  .review-item p {
+    font-size: 14px;
+  }
+}
+
+/* ===============================
+   VERY SMALL PHONES
+=============================== */
+@media (max-width: 380px) {
+  .page-title {
+    font-size: 26px;
+  }
+
+  .rating-select {
+    gap: 6px;
+  }
+
+  .rating-select .star {
+    font-size: 22px;
+  }
+}

@@ -1,0 +1,167 @@
+/* ===============================
+   INDIA LOVES SECTION
+================================ */
+.india-loves {
+  padding: 60px 80px;
+  background: #fff;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.il-title {
+  font-size: 32px;
+  text-align: center;
+  font-weight: 700;
+  color: #ff4f88;
+}
+
+.il-sub {
+  margin-top: 6px;
+  padding-bottom: 20px;
+  font-size: 15px;
+  text-align: center;
+  color: #666;
+}
+
+/* ===============================
+   DESKTOP + MOBILE – HORIZONTAL SLIDER
+================================ */
+.il-grid {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 10px;
+}
+
+.il-grid::-webkit-scrollbar {
+  display: none;
+}
+
+/* ===============================
+   CARD
+================================ */
+.il-card {
+  min-width: 260px; /* desktop width */
+  cursor: pointer;
+}
+
+/* IMAGE WRAPPER */
+.il-img-box {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  margin-bottom: 10px;
+}
+
+/* IMAGE */
+.il-img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  transition: opacity 0.6s ease-in-out, transform 0.4s ease;
+}
+
+/* HOVER */
+.il-card:hover .il-img {
+  transform: scale(1.04);
+}
+
+
+
+/* ===============================
+   CONTENT
+================================ */
+.il-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.il-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #222;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* PRICE + HEART */
+.price-heart-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.il-price {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111;
+}
+
+.heart {
+  font-size: 18px;
+  color: #222;
+  cursor: pointer;
+}
+
+.heart.active {
+  color: #e11d48;
+}
+
+/* RATING */
+.il-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: #444;
+}
+
+.star {
+  color: #16a34a;
+}
+
+/* ===============================
+   VIEW ALL BUTTON
+================================ */
+.view-all-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.view-all-btn {
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  background: #ff4f88;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.view-all-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(255, 79, 136, 0.35);
+}
+
+/* ===============================
+   MOBILE
+================================ */
+@media (max-width: 768px) {
+  .india-loves {
+    padding: 40px 20px;
+  }
+
+  .il-card {
+    min-width: 220px;
+  }
+
+  .il-img {
+    height: 240px;
+  }
+}
