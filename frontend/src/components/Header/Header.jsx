@@ -41,6 +41,7 @@ export default function Header() {
             alt="logo"
             className="header-logo"
           />
+
           <div className="logo-text">
             <h2>Sweet Tooth</h2>
             <span>Cakes & Desserts</span>
