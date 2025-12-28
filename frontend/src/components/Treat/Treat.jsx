@@ -4,10 +4,11 @@ import "./Treat.css";
 import { FiHeart } from "react-icons/fi";
 import API from "../api";
 
+const BACKEND_URL = "https://sweettooth-backend.onrender.com";
+
 export default function Treats() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const BACKEND_URL = "https://sweettooth-backend.onrender.com";
 
   /* =========================
      STATES
@@ -31,7 +32,7 @@ export default function Treats() {
   useEffect(() => {
     API.get("/products")
       .then((res) => setProducts(res.data))
-      .catch(console.error);
+      .catch((err) => console.error("Products error:", err));
   }, []);
 
   /* =========================
@@ -47,7 +48,6 @@ export default function Treats() {
 
   /* =========================
      APPLY CATEGORY FROM URL
-     /treat?category=classic
   ========================= */
   useEffect(() => {
     const urlCategory = searchParams.get("category");
@@ -70,7 +70,7 @@ export default function Treats() {
       const res = await API.post("/wishlist", {
         productId: cake._id,
         title: cake.title,
-        price: cake.price,
+        price: cake.priceByKg?.["1"],
         img: cake.images?.[0],
         badge: cake.bestseller ? "Best Seller" : "",
       });
@@ -88,18 +88,22 @@ export default function Treats() {
     .filter((cake) => {
       if (category !== "all" && cake.category !== category) return false;
 
-      if (priceRange === "low" && cake.price > 500) return false;
-      if (priceRange === "mid" && (cake.price < 500 || cake.price > 1000))
-        return false;
-      if (priceRange === "high" && cake.price < 1000) return false;
+      const price = cake.priceByKg?.["1"] || 0;
+
+      if (priceRange === "low" && price > 500) return false;
+      if (priceRange === "mid" && (price < 500 || price > 1000)) return false;
+      if (priceRange === "high" && price < 1000) return false;
 
       if (onlyBestseller && !cake.bestseller) return false;
 
       return true;
     })
     .sort((a, b) => {
-      if (sortBy === "priceLow") return a.price - b.price;
-      if (sortBy === "priceHigh") return b.price - a.price;
+      const priceA = a.priceByKg?.["1"] || 0;
+      const priceB = b.priceByKg?.["1"] || 0;
+
+      if (sortBy === "priceLow") return priceA - priceB;
+      if (sortBy === "priceHigh") return priceB - priceA;
       if (sortBy === "name") return a.title.localeCompare(b.title);
       return 0;
     });
@@ -118,82 +122,25 @@ export default function Treats() {
   ========================= */
   return (
     <section className="treats-section">
-      {/* ================= FILTER BAR ================= */}
+      {/* FILTER BAR */}
       <div className="filter-bar">
-        {/* CATEGORY */}
-        <button
-          className={`filter-chip ${category === "all" ? "active" : ""}`}
-          onClick={() => setCategory("all")}
-        >
-          All
+        <button className={`filter-chip ${category === "all" ? "active" : ""}`} onClick={() => setCategory("all")}>All</button>
+        <button className={`filter-chip ${category === "classic" ? "active" : ""}`} onClick={() => setCategory("classic")}>Classic</button>
+        <button className={`filter-chip ${category === "gourmet" ? "active" : ""}`} onClick={() => setCategory("gourmet")}>Desserts</button>
+        <button className={`filter-chip ${category === "designer" ? "active" : ""}`} onClick={() => setCategory("designer")}>Designer</button>
+
+        <button className={`filter-chip ${priceRange === "low" ? "active" : ""}`} onClick={() => setPriceRange("low")}>Under ₹500</button>
+        <button className={`filter-chip ${priceRange === "mid" ? "active" : ""}`} onClick={() => setPriceRange("mid")}>₹500–₹1000</button>
+        <button className={`filter-chip ${priceRange === "high" ? "active" : ""}`} onClick={() => setPriceRange("high")}>Above ₹1000</button>
+
+        <button className={`filter-chip ${onlyBestseller ? "active" : ""}`} onClick={() => setOnlyBestseller(!onlyBestseller)}>Bestseller</button>
+
+        {/* SECRET ADMIN */}
+        <button className="filter-chip secret-chip" onClick={() => navigate("/add-cake")}>
+          More
         </button>
 
-        <button
-          className={`filter-chip ${category === "classic" ? "active" : ""}`}
-          onClick={() => setCategory("classic")}
-        >
-          Classic
-        </button>
-
-        <button
-          className={`filter-chip ${category === "gourmet" ? "active" : ""}`}
-          onClick={() => setCategory("gourmet")}
-        >
-          Desserts
-        </button>
-
-        <button
-          className={`filter-chip ${category === "designer" ? "active" : ""}`}
-          onClick={() => setCategory("designer")}
-        >
-          Designer
-        </button>
-
-        {/* PRICE */}
-        <button
-          className={`filter-chip ${priceRange === "low" ? "active" : ""}`}
-          onClick={() => setPriceRange("low")}
-        >
-          Under ₹500
-        </button>
-
-        <button
-          className={`filter-chip ${priceRange === "mid" ? "active" : ""}`}
-          onClick={() => setPriceRange("mid")}
-        >
-          ₹500–₹1000
-        </button>
-
-        <button
-          className={`filter-chip ${priceRange === "high" ? "active" : ""}`}
-          onClick={() => setPriceRange("high")}
-        >
-          Above ₹1000
-        </button>
-
-        {/* BESTSELLER */}
-        <button
-          className={`filter-chip ${onlyBestseller ? "active" : ""}`}
-          onClick={() => setOnlyBestseller(!onlyBestseller)}
-        >
-          Bestseller
-        </button>
-        {/* SECRET ADMIN BUTTON 😈 */}
-          <button
-            className="filter-chip secret-chip"
-            onClick={() => navigate("/add-cake")}
-            title="More"
-          >
-            More
-          </button>
-
-
-        {/* SORT */}
-        <select
-          className="sort-btn"
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
-        >
+        <select className="sort-btn" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
           <option value="">Sort</option>
           <option value="priceLow">Price: Low → High</option>
           <option value="priceHigh">Price: High → Low</option>
@@ -201,38 +148,26 @@ export default function Treats() {
         </select>
       </div>
 
-      {/* ================= PRODUCTS GRID ================= */}
+      {/* PRODUCTS GRID */}
       <div className="treats-grid">
         {paginatedProducts.map((cake) => (
-          <div
-            key={cake._id}
-            className="treat-card"
-            onClick={() => navigate(`/cake/${cake._id}`)}
-          >
+          <div key={cake._id} className="treat-card" onClick={() => navigate(`/cake/${cake._id}`)}>
             <div className="card-img-box">
-                        <img
-              src={`${BACKEND_URL}${cake.images?.[0]}`}
-              className="treat-img"
-              alt={cake.title}
-            />
-
-
-              {cake.bestseller && (
-                <span className="badge">Best Seller</span>
-              )}
+              <img
+                src={`${BACKEND_URL}${cake.images?.[0]}`}
+                alt={cake.title}
+                className="treat-img"
+                onError={(e) => (e.target.src = "/assets/placeholder.png")}
+              />
+              {cake.bestseller && <span className="badge">Best Seller</span>}
             </div>
 
             <div className="card-content">
               <h3 className="cake-name">{cake.title}</h3>
-
               <div className="price-heart-row">
-               <p className="price">₹{cake.priceByKg?.["1"]}</p>
-
-
+                <p className="price">₹{cake.priceByKg?.["1"]}</p>
                 <FiHeart
-                  className={`heart-icon ${
-                    wishlist.includes(cake._id) ? "active" : ""
-                  }`}
+                  className={`heart-icon ${wishlist.includes(cake._id) ? "active" : ""}`}
                   onClick={(e) => toggleWishlist(cake, e)}
                 />
               </div>
@@ -241,32 +176,16 @@ export default function Treats() {
         ))}
       </div>
 
-      {/* ================= PAGINATION ================= */}
+      {/* PAGINATION */}
       {totalPages > 1 && (
         <div className="pagination">
-          <button
-            disabled={currentPage === 1}
-            onClick={() => setCurrentPage((p) => p - 1)}
-          >
-            Prev
-          </button>
-
+          <button disabled={currentPage === 1} onClick={() => setCurrentPage((p) => p - 1)}>Prev</button>
           {Array.from({ length: totalPages }, (_, i) => (
-            <button
-              key={i}
-              className={currentPage === i + 1 ? "active" : ""}
-              onClick={() => setCurrentPage(i + 1)}
-            >
+            <button key={i} className={currentPage === i + 1 ? "active" : ""} onClick={() => setCurrentPage(i + 1)}>
               {i + 1}
             </button>
           ))}
-
-          <button
-            disabled={currentPage === totalPages}
-            onClick={() => setCurrentPage((p) => p + 1)}
-          >
-            Next
-          </button>
+          <button disabled={currentPage === totalPages} onClick={() => setCurrentPage((p) => p + 1)}>Next</button>
         </div>
       )}
     </section>
