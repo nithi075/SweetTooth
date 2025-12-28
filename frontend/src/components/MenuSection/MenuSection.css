@@ -33,7 +33,7 @@
 }
 
 /* ==================================================
-   GRID — DESKTOP / TABLET (NEW STYLE)
+   GRID — DESKTOP + TABLET (FIRST CODE STYLE)
 ================================================== */
 .menu-grid {
   display: grid;
@@ -42,7 +42,7 @@
 }
 
 /* ==================================================
-   CARD — DESKTOP / TABLET
+   CARD — DESKTOP + TABLET
 ================================================== */
 .menu-card {
   background: var(--white);
@@ -60,7 +60,7 @@
 }
 
 /* ==================================================
-   ⭐ STARS (DESKTOP ONLY)
+   ⭐ STARS — DESKTOP + TABLET
 ================================================== */
 .stars {
   position: absolute;
@@ -74,7 +74,7 @@
 }
 
 /* ==================================================
-   IMAGE — DESKTOP / TABLET
+   IMAGE — DESKTOP + TABLET
 ================================================== */
 .menu-img {
   width: 100%;
@@ -95,7 +95,7 @@
 }
 
 /* ==================================================
-   MOBILE — OLD STYLE RESTORED (≤600px)
+   MOBILE (≤600px) — SECOND CODE STYLE
 ================================================== */
 @media (max-width: 600px) {
 
@@ -113,13 +113,13 @@
     margin-bottom: 40px;
   }
 
-  /* OLD 2 COLUMN GRID */
+  /* 2 COLUMN GRID — OLD STYLE */
   .menu-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 18px;
   }
 
-  /* FLAT CARD (OLD LOOK) */
+  /* FLAT CARD — OLD LOOK */
   .menu-card {
     padding: 10px;
     box-shadow: none;
@@ -132,14 +132,14 @@
     display: none;
   }
 
-  /* IMAGE — FIXED HEIGHT (OLD BEHAVIOUR) */
+  /* IMAGE — FIXED HEIGHT (OLD MOBILE STYLE) */
   .menu-img {
     aspect-ratio: unset;   /* override desktop */
     height: 165px;
     border-radius: 16px;
   }
 
-  /* TEXT */
+  /* NAME */
   .menu-name {
     font-size: 14px;
     margin-top: 10px;
