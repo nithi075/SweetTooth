@@ -13,7 +13,7 @@ export default function Footer() {
         {/* BRAND BLOCK */}
         <div className="footer-section brand">
           <img 
-            src="/src/assets/SweetTooth_Logo.png" 
+            src="/images/logo.png" 
             alt="Logo" 
             className="footer-cupcake"
           />
