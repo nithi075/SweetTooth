@@ -1,9 +1,22 @@
-import { v2 as cloudinary } from "cloudinary";
+import upload from "../middleware/upload.js";
+import cloudinary from "../config/cloudinary.js";
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
+router.post("/", upload.array("images", 5), async (req, res) => {
+  const imageUrls = [];
+
+  for (const file of req.files) {
+    const result = await cloudinary.uploader.upload(
+      `data:${file.mimetype};base64,${file.buffer.toString("base64")}`,
+      { folder: "sweettooth_cakes" }
+    );
+    imageUrls.push(result.secure_url);
+  }
+
+  const product = new Product({
+    ...req.body,
+    images: imageUrls, // 🔥 URLs only
+  });
+
+  await product.save();
+  res.json(product);
 });
-
-export default cloudinary;

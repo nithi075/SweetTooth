@@ -1,36 +1,26 @@
 import multer from "multer";
-import path from "path";
-import fs from "fs";
-import { fileURLToPath } from "url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+/*
+  🔥 Cloudinary-ku local disk storage vendam
+  🔥 Memory storage use pannrom
+*/
 
-const uploadPath = path.join(__dirname, "../uploads");
-
-// uploads folder illa na create pannum
-if (!fs.existsSync(uploadPath)) {
-  fs.mkdirSync(uploadPath);
-}
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, uploadPath);
-  },
-  filename: (req, file, cb) => {
-    cb(
-      null,
-      Date.now() +
-        "-" +
-        Math.round(Math.random() * 1e9) +
-        path.extname(file.originalname)
-    );
-  },
-});
+const storage = multer.memoryStorage();
 
 const upload = multer({
   storage,
-  limits: { files: 5 },
+  limits: {
+    fileSize: 5 * 1024 * 1024, // 5MB per image
+    files: 5,                 // max 5 images
+  },
+  fileFilter: (req, file, cb) => {
+    // allow only images
+    if (file.mimetype.startsWith("image/")) {
+      cb(null, true);
+    } else {
+      cb(new Error("Only image files are allowed"), false);
+    }
+  },
 });
 
 export default upload;

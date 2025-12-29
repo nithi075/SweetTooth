@@ -34,19 +34,7 @@ app.get("/__health", (req, res) => {
 });
 
 /* ================= STATIC UPLOADS (🔥 FIX HERE 🔥) */
-app.use(
-  "/uploads",
-  express.static(path.join(__dirname, "uploads"), {
-    setHeaders: (res) => {
-      res.setHeader(
-        "Cache-Control",
-        "no-store, no-cache, must-revalidate, proxy-revalidate"
-      );
-      res.setHeader("Pragma", "no-cache");
-      res.setHeader("Expires", "0");
-    },
-  })
-);
+
 
 /* ================= API ROUTES ================= */
 app.use("/api/products", productRoutes);
