@@ -21,7 +21,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 /* ================= MIDDLEWARE ================= */
-app.use(cors());
+app.use(
+  cors({
+    origin: "*", // frontend + mobile safe
+  })
+);
 app.use(express.json());
 
 /* ================= HEALTH CHECK ================= */
@@ -29,8 +33,20 @@ app.get("/__health", (req, res) => {
   res.json({ ok: true });
 });
 
-/* ================= STATIC UPLOADS ================= */
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+/* ================= STATIC UPLOADS (🔥 FIX HERE 🔥) */
+app.use(
+  "/uploads",
+  express.static(path.join(__dirname, "uploads"), {
+    setHeaders: (res) => {
+      res.setHeader(
+        "Cache-Control",
+        "no-store, no-cache, must-revalidate, proxy-revalidate"
+      );
+      res.setHeader("Pragma", "no-cache");
+      res.setHeader("Expires", "0");
+    },
+  })
+);
 
 /* ================= API ROUTES ================= */
 app.use("/api/products", productRoutes);
