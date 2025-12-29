@@ -46,25 +46,39 @@ export const getSingleProduct = async (req, res) => {
 ========================= */
 export const createProduct = async (req, res) => {
   try {
+    console.log("📥 BODY:", req.body);
+    console.log("📸 FILES:", req.files?.length);
+
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({ error: "No images uploaded" });
+    }
+
+    // 🧪 CHECK ENV
+    console.log("☁️ CLOUDINARY ENV:", {
+      cloud: !!process.env.CLOUDINARY_CLOUD_NAME,
+      key: !!process.env.CLOUDINARY_API_KEY,
+      secret: !!process.env.CLOUDINARY_API_SECRET,
+    });
+
+    let priceByKg;
+    try {
+      priceByKg = JSON.parse(req.body.priceByKg);
+    } catch (e) {
+      console.error("❌ priceByKg parse error", e);
+      return res.status(400).json({ error: "Invalid priceByKg format" });
     }
 
     const imageUrls = [];
 
     for (const file of req.files) {
+      console.log("⬆️ Uploading image:", file.originalname);
+
       const result = await cloudinary.uploader.upload(
         `data:${file.mimetype};base64,${file.buffer.toString("base64")}`,
         { folder: "sweettooth_cakes" }
       );
-      imageUrls.push(result.secure_url);
-    }
 
-    let priceByKg;
-    try {
-      priceByKg = JSON.parse(req.body.priceByKg);
-    } catch {
-      return res.status(400).json({ error: "Invalid priceByKg format" });
+      imageUrls.push(result.secure_url);
     }
 
     const product = new Product({
@@ -81,9 +95,10 @@ export const createProduct = async (req, res) => {
     });
 
     await product.save();
+
     res.status(201).json(product);
   } catch (err) {
-    console.error("CREATE PRODUCT ERROR:", err);
+    console.error("🔥 CREATE PRODUCT ERROR FULL:", err);
     res.status(500).json({ error: err.message });
   }
 };
