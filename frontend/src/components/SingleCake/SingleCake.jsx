@@ -5,8 +5,6 @@ import { FiHeart } from "react-icons/fi";
 import API from "../api";
 import SingleCakeReview from "../SingleCakesReview/SIngleCakeReview";
 
-const BACKEND_URL = "https://sweettooth-backend.onrender.com";
-
 export default function SingleCake() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -26,9 +24,9 @@ export default function SingleCake() {
   useEffect(() => {
     API.get(`/products/${id}`).then((res) => {
       setCake(res.data);
-     const firstImg = res.data.images?.[0] || "";
-      setActiveImg(firstImg);
 
+      const firstImg = res.data.images?.[0] || "";
+      setActiveImg(firstImg);
 
       if (res.data.priceByKg?.["1"]) {
         setPrice(res.data.priceByKg["1"]);
@@ -50,7 +48,9 @@ export default function SingleCake() {
     });
   }, [id]);
 
-  if (!cake) return <p style={{ textAlign: "center" }}>Loading...</p>;
+  if (!cake) {
+    return <p style={{ textAlign: "center" }}>Loading...</p>;
+  }
 
   const related = allProducts.filter(
     (p) => p.category === cake.category && p._id !== cake._id
@@ -73,7 +73,7 @@ export default function SingleCake() {
         price,
         qty: 1,
         kg: selectedKg,
-        img: cake.images[0],
+        img: cake.images[0], // 🔥 Cloudinary URL
         message,
       });
 
@@ -92,7 +92,7 @@ export default function SingleCake() {
         productId: cake._id,
         title: cake.title,
         price,
-        img: cake.images?.[0],
+        img: cake.images?.[0], // 🔥 Cloudinary URL
         badge: cake.bestseller ? "Best Seller" : "",
       });
 
@@ -117,10 +117,12 @@ export default function SingleCake() {
               {cake.images.map((img, i) => (
                 <img
                   key={i}
-                  src={`${BACKEND_URL}${img}`}
-                  className={`thumbnail ${activeImg === img ? "active" : ""}`}
+                  src={img} // 🔥 FIXED (Cloudinary)
+                  className={`thumbnail ${
+                    activeImg === img ? "active" : ""
+                  }`}
                   onClick={() => setActiveImg(img)}
-                  alt=""
+                  alt="thumbnail"
                 />
               ))}
             </div>
@@ -130,17 +132,16 @@ export default function SingleCake() {
                 <span className="eggless-badge">EGGLESS</span>
               )}
 
-                        {activeImg && (
-            <img
-              src={`${BACKEND_URL}${activeImg}`}
-              className="main-image"
-              alt={cake.title}
-              onError={(e) => {
-                e.currentTarget.src = "/placeholder-cake.jpg";
-              }}
-            />
-          )}
-
+              {activeImg && (
+                <img
+                  src={activeImg} // 🔥 FIXED
+                  className="main-image"
+                  alt={cake.title}
+                  onError={(e) => {
+                    e.currentTarget.src = "/placeholder-cake.jpg";
+                  }}
+                />
+              )}
             </div>
           </div>
 
@@ -153,7 +154,9 @@ export default function SingleCake() {
               {Object.keys(cake.priceByKg || {}).map((kg) => (
                 <button
                   key={kg}
-                  className={`kg-btn ${selectedKg === kg ? "active" : ""}`}
+                  className={`kg-btn ${
+                    selectedKg === kg ? "active" : ""
+                  }`}
                   onClick={() => handleKgChange(kg)}
                 >
                   {kg} Kg
@@ -196,7 +199,9 @@ export default function SingleCake() {
 
             {/* ❤️ WISHLIST */}
             <FiHeart
-              className={`wishlist-icon ${wishlist ? "active" : ""}`}
+              className={`wishlist-icon ${
+                wishlist ? "active" : ""
+              }`}
               onClick={toggleWishlist}
             />
           </div>
@@ -218,7 +223,7 @@ export default function SingleCake() {
                 onClick={() => navigate(`/cake/${item._id}`)}
               >
                 <img
-                  src={`${BACKEND_URL}${item.images[0]}`}
+                  src={item.images[0]} // 🔥 FIXED
                   alt={item.title}
                 />
                 <h4>{item.title}</h4>
