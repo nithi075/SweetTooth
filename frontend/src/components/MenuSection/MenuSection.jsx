@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 const categories = [
   { id: 1, title: "CLASSIC", value: "classic", img: "/images/menu/menu1.jpg" },
-  { id: 2, title: "GOURMET", value: "gourmet", img: "/images/menu/menu2.jpg" },
+  { id: 2, title: "DESSERTS", value: "desserts", img: "/images/menu/menu2.jpg" },
   { id: 3, title: "DESIGNER", value: "designer", img: "/images/menu/menu3.jpg" },
-  { id: 4, title: "DESSERTS", value: "desserts", img: "/images/menu/menu4.jpg" },
+  { id: 4, title: "BROWNIES", value: "brownies", img:"/images/menu/menu4.jpg" },
 ];
 
 export default function MenuSection() {

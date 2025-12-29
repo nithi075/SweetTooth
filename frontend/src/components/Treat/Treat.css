@@ -224,3 +224,68 @@
     font-size: 15px;
   }
 }
+/* =========================
+   PAGINATION
+========================= */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 60px 0 20px;
+  flex-wrap: wrap;
+}
+
+/* BUTTON */
+.pagination button {
+  min-width: 38px;
+  height: 38px;
+  padding: 0 12px;
+  border-radius: 50px;
+  border: none;
+  background: #fff;
+  color: #444;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transition: all 0.25s ease;
+}
+
+/* HOVER */
+.pagination button:hover:not(:disabled) {
+  background: #f44a6a;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ACTIVE PAGE */
+.pagination button.active {
+  background: #f44a6a;
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(244,74,106,0.45);
+}
+
+/* DISABLED */
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* =========================
+   MOBILE TUNING
+========================= */
+@media (max-width: 600px) {
+  .pagination {
+    gap: 8px;
+    margin: 40px 0 10px;
+  }
+
+  .pagination button {
+    min-width: 34px;
+    height: 34px;
+    font-size: 13px;
+    padding: 0 10px;
+  }
+}
