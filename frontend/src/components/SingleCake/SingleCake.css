@@ -187,13 +187,18 @@
 }
 
 /* ===================================
-   YOU MAY ALSO LIKE (DESKTOP EXACT)
+   🔥 FORCE OVERRIDE – YOU MAY ALSO LIKE
+   (WORKS WITH EXISTING JSX)
 =================================== */
+
+/* SECTION */
 .suggest-section {
   padding: 50px 80px;
-  background: var(--beige-light);
+  background: #f9f4e8;
+  font-family: 'Quicksand', sans-serif;
 }
 
+/* HEADER */
 .suggest-header {
   display: flex;
   justify-content: space-between;
@@ -202,19 +207,24 @@
 }
 
 .suggest-header h2 {
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 700;
+  color: #111;
 }
 
-.view-all {
+.suggest-header a,
+.suggest-header span {
   font-size: 15px;
   font-weight: 600;
   color: #2b6cff;
   cursor: pointer;
 }
 
+/* =========================
+   🖥️ DESKTOP GRID (FORCE)
+========================= */
 .suggest-grid {
-  display: grid;
+  display: grid !important;
   grid-template-columns: repeat(4, 1fr);
   gap: 28px;
 }
@@ -224,32 +234,21 @@
   cursor: pointer;
 }
 
-.suggest-img-box {
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-}
-
-.suggest-img {
+/* IMAGE (TARGET DIRECT IMG) */
+.suggest-card img {
   width: 100%;
-  height: 260px;
+  height: 260px;                 /* 🔥 EXACT like screenshot */
   object-fit: cover;
+  border-radius: 16px;
+  display: block;
+  background: #eee;
 }
 
-.suggest-badge {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  background: #ffcf56;
-  padding: 4px 10px;
-  font-size: 13px;
-  font-weight: 600;
-  border-radius: 6px;
-}
-
-.suggest-title {
+/* TITLE (h4) */
+.suggest-card h4 {
   font-size: 15px;
   font-weight: 600;
+  color: #111;
   margin: 10px 0 6px;
   line-height: 1.3;
 
@@ -259,86 +258,19 @@
   overflow: hidden;
 }
 
-.suggest-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.suggest-price {
+/* PRICE (p) */
+.suggest-card p {
   font-size: 15px;
   font-weight: 700;
+  color: #111;
+  margin: 0;
 }
 
 /* ===================================
-   📱 MOBILE (SWIGGY STYLE)
+   📱 MOBILE – HORIZONTAL SCROLL
 =================================== */
 @media (max-width: 600px) {
 
-  .cake-details-section {
-    padding: 24px 16px;
-    margin-top: 60px;
-  }
-
-  .cake-details-container {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .left-column {
-    flex-direction: column-reverse;
-    align-items: center;
-  }
-
-  .thumbnail-list {
-    flex-direction: row;
-    gap: 8px;
-    overflow-x: auto;
-  }
-
-  .thumbnail {
-    width: 56px;
-    height: 56px;
-  }
-
-  .main-image {
-    width: 100%;
-    height: 300px;
-  }
-
-  .cake-title {
-    font-size: 20px;
-  }
-
-  .cake-price {
-    font-size: 18px;
-  }
-
-  .cake-description {
-    font-size: 13px;
-  }
-
-  .kg-btn {
-    min-width: 58px;
-    padding: 8px 12px;
-    font-size: 13px;
-  }
-
-  .cake-message-box {
-    height: 56px;
-  }
-
-  .buy-btn {
-    font-size: 15px;
-    padding: 12px;
-  }
-
-  .add-cart-btn {
-    font-size: 14px;
-    padding: 11px;
-  }
-
-  /* YOU MAY ALSO LIKE – MOBILE SLIDER */
   .suggest-section {
     padding: 28px 16px;
   }
@@ -348,9 +280,12 @@
   }
 
   .suggest-grid {
-    display: flex;
-    overflow-x: auto;
+    display: flex !important;
     gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scroll-behavior: smooth;
+
     scrollbar-width: none;
   }
 
@@ -360,17 +295,29 @@
 
   .suggest-card {
     min-width: 200px;
+    flex: 0 0 auto;
   }
 
-  .suggest-img {
+  .suggest-card img {
     height: 200px;
   }
 
-  .suggest-title {
+  .suggest-card h4 {
     font-size: 13px;
   }
 
-  .suggest-price {
+  .suggest-card p {
     font-size: 13px;
+  }
+}
+
+/* VERY SMALL PHONES */
+@media (max-width: 380px) {
+  .suggest-card {
+    min-width: 180px;
+  }
+
+  .suggest-card img {
+    height: 180px;
   }
 }
