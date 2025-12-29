@@ -21,7 +21,7 @@
 =============================== */
 .review-summary {
   text-align: center;
-  margin-bottom: 32px;
+  margin-bottom: 36px;
 }
 
 .review-summary h2 {
@@ -48,46 +48,28 @@
 }
 
 /* ===============================
-   REVIEW IMAGE STRIP
-=============================== */
-.review-gallery {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  margin: 24px auto 42px;
-  overflow-x: auto;
-  padding-bottom: 6px;
-}
-
-.review-gallery::-webkit-scrollbar {
-  display: none;
-}
-
-.gallery-img {
-  width: 62px;
-  height: 62px;
-  border-radius: 14px;
-  object-fit: cover;
-  flex-shrink: 0;
-}
-
-/* ===============================
-   REVIEW CARDS GRID
+   REVIEW CARDS GRID (DESKTOP)
 =============================== */
 .review-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  gap: 32px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 28px;
 }
 
-/* CARD */
+/* ===============================
+   REVIEW CARD (FIXED SIZE)
+=============================== */
 .review-card {
-  display: flex;
-  gap: 18px;
   background: var(--card-bg);
-  padding: 22px;
+  padding: 20px;
   border-radius: 20px;
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
+
+  height: 260px;            /* 🔥 FIXED HEIGHT */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -96,17 +78,18 @@
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
 }
 
-/* IMAGE */
-.review-user-img {
-  width: 140px;
-  height: 140px;
-  border-radius: 16px;
-  object-fit: cover;
+/* ===============================
+   CONTENT
+=============================== */
+.review-content-box {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-/* CONTENT */
-.review-content-box {
-  flex: 1;
+/* STARS */
+.rating-row {
+  margin-bottom: 8px;
 }
 
 .rating-row .star-icon {
@@ -115,11 +98,23 @@
   margin-right: 3px;
 }
 
+/* REVIEW TEXT (CLAMPED) */
 .review-text {
-  font-size: 15px;
+  font-size: 14px;
   color: #444;
-  line-height: 1.55;
-  margin: 10px 0 14px;
+  line-height: 1.5;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;      /* 🔥 MAX 3 LINES */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  margin-bottom: auto;
+}
+
+/* USER */
+.review-user-details {
+  margin-top: 14px;
 }
 
 .review-user-details h4 {
@@ -131,11 +126,7 @@
 
 .verified-icon {
   color: var(--success);
-}
-
-.small-details {
-  font-size: 13px;
-  opacity: 0.65;
+  font-size: 14px;
 }
 
 /* ===============================
@@ -192,15 +183,6 @@ textarea {
   color: var(--star);
 }
 
-/* IMAGE PREVIEW */
-.upload-preview {
-  width: 120px;
-  height: 120px;
-  border-radius: 14px;
-  object-fit: cover;
-  margin-bottom: 16px;
-}
-
 /* BUTTON */
 .submit-review-btn {
   width: 100%;
@@ -220,7 +202,7 @@ textarea {
 }
 
 /* ===============================
-   MOBILE — SWIGGY STYLE SLIDER
+   MOBILE – SWIGGY SLIDER
 =============================== */
 @media (max-width: 600px) {
   .cake-review-section {
@@ -229,8 +211,8 @@ textarea {
 
   .review-cards {
     display: flex;
-    overflow-x: auto;
     gap: 16px;
+    overflow-x: auto;
     scroll-snap-type: x mandatory;
     padding-bottom: 10px;
   }
@@ -240,32 +222,16 @@ textarea {
   }
 
   .review-card {
-    flex: 0 0 240px;
+    flex: 0 0 260px;        /* 🔥 SWIGGY WIDTH */
+    height: 300px;
     scroll-snap-align: start;
-    padding: 16px;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .review-user-img {
-    width: 180px;
-    height: 180px;
-  }
-
-  .review-text {
-    font-size: 14px;
   }
 }
 
 /* EXTRA SMALL */
 @media (max-width: 380px) {
   .review-card {
-    flex: 0 0 200px;
-  }
-
-  .review-user-img {
-    width: 150px;
-    height: 150px;
+    flex: 0 0 220px;
+    height: 280px;
   }
 }
