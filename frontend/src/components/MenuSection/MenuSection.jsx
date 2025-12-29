@@ -6,8 +6,6 @@ const categories = [
   { id: 2, title: "GOURMET", value: "gourmet", img: "/images/menu/menu2.jpg" },
   { id: 3, title: "DESIGNER", value: "designer", img: "/images/menu/menu3.jpg" },
   { id: 4, title: "DESSERTS", value: "desserts", img: "/images/menu/menu4.jpg" },
-  { id: 5, title: "COOKIES", value: "cookies", img: "/images/menu/menu5.jpg" },
-  { id: 6, title: "HAMPERS", value: "hampers", img: "/images/menu/menu6.jpg" },
 ];
 
 export default function MenuSection() {
