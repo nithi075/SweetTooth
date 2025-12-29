@@ -9,63 +9,67 @@
   --shadow-card: 0 12px 28px rgba(0, 0, 0, 0.08);
 }
 
-/* MAIN SECTION */
+/* ===============================
+   MAIN SECTION
+=============================== */
 .contact-section {
   width: 100%;
   font-family: 'Quicksand', sans-serif;
   background: var(--beige-light);
 }
 
-/* -----------------------------------
-      HERO SECTION
------------------------------------ */
+/* ===============================
+   HERO SECTION
+=============================== */
 .contact-hero {
   text-align: center;
-  padding: 130px 40px 90px;
-  background: linear-gradient(135deg, #ffe3ed, #ffd4e3, #ffeef4);
-  border-bottom-left-radius: 50px;
-  border-bottom-right-radius: 50px;
-  box-shadow: inset 0 0 40px rgba(255, 90, 140, 0.15);
+  padding: 120px 24px 90px;
+  background: linear-gradient(135deg, #ffe3ed, #ffd4e3, #fff1f6);
+  border-bottom-left-radius: 48px;
+  border-bottom-right-radius: 48px;
 }
 
 .contact-hero h1 {
-  font-size: 56px;
+  font-size: 52px;
   font-weight: 700;
   color: var(--pink);
 }
 
 .contact-hero p {
-  font-size: 20px;
-  opacity: 0.75;
+  font-size: 19px;
+  opacity: 0.8;
   margin-top: 10px;
 }
 
-/* -----------------------------------
-      MAIN CONTENT
------------------------------------ */
+/* ===============================
+   MAIN CONTENT
+=============================== */
 .contact-container {
-  display: flex;
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 60px;
-  padding: 80px 120px;
-  align-items: flex-start;
+  padding: 80px 40px;
 }
 
-/* LEFT PANEL */
+/* ===============================
+   LEFT PANEL
+=============================== */
 .contact-info {
-  flex: 1;
-  background: rgba(255, 255, 255, 0.6);
-  padding: 35px;
-  border-radius: 20px;
-  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.7);
+  padding: 36px;
+  border-radius: 22px;
+  backdrop-filter: blur(14px);
   box-shadow: var(--shadow-card);
-  border: 1px solid rgba(255, 175, 195, 0.25);
+  border: 1px solid rgba(255, 175, 195, 0.3);
 }
 
 .contact-title {
-  font-size: 32px;
+  font-size: 30px;
   font-weight: 700;
   color: var(--pink);
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .info-item {
@@ -73,10 +77,9 @@
   align-items: center;
   gap: 12px;
   margin: 14px 0;
-  font-size: 17px;
+  font-size: 16px;
   color: var(--text-dark);
-  opacity: 0.9;
-  transition: 0.3s;
+  transition: 0.25s;
 }
 
 .info-item:hover {
@@ -84,9 +87,9 @@
   color: var(--pink);
 }
 
-/* INSTAGRAM PROFILE CARD */
+/* INSTAGRAM CARD */
 .follow-title {
-  margin-top: 28px;
+  margin-top: 30px;
   font-size: 20px;
   font-weight: 600;
   color: var(--pink);
@@ -95,10 +98,10 @@
 .insta-card {
   margin-top: 18px;
   display: flex;
+  gap: 16px;
   align-items: center;
-  gap: 18px;
   background: #fff;
-  padding: 16px 20px;
+  padding: 18px;
   border-radius: 18px;
   box-shadow: var(--shadow-soft);
   border: 1px solid #ffd5e2;
@@ -106,23 +109,23 @@
 }
 
 .insta-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
 }
 
 .insta-avatar {
-  width: 60px;
-  height: 60px;
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
   object-fit: cover;
-
   border: 3px solid transparent;
-  background-image: linear-gradient(#fff, #fff),
+  background-image:
+    linear-gradient(#fff, #fff),
     linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
   background-clip: content-box, border-box;
 }
 
 .insta-details h4 {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 600;
   margin: 0;
 }
@@ -130,17 +133,19 @@
 .insta-details p {
   font-size: 13px;
   opacity: 0.7;
-  margin: 2px 0 8px;
+  margin: 4px 0 10px;
 }
 
 .insta-follow-btn {
-  padding: 7px 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
   font-size: 14px;
-  border-radius: 8px;
+  border-radius: 999px;
   background: linear-gradient(45deg, var(--pink), #ff7faf);
   color: #fff;
-  border: none;
-  cursor: pointer;
+  text-decoration: none;
   transition: 0.3s;
 }
 
@@ -148,14 +153,13 @@
   transform: scale(1.08);
 }
 
-/* -----------------------------------
-      RIGHT PANEL — FORM
------------------------------------ */
+/* ===============================
+   RIGHT PANEL – FORM
+=============================== */
 .contact-form {
-  flex: 1;
   background: #fff;
-  padding: 45px 35px;
-  border-radius: 20px;
+  padding: 44px 36px;
+  border-radius: 22px;
   box-shadow: var(--shadow-soft);
   border: 1px solid #ffd7e5;
 }
@@ -164,15 +168,15 @@
   font-size: 26px;
   font-weight: 700;
   color: var(--pink);
-  margin-bottom: 30px;
+  margin-bottom: 28px;
 }
 
 .form-group {
-  margin-bottom: 25px;
+  margin-bottom: 22px;
 }
 
 .form-group label {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   margin-bottom: 6px;
   display: block;
@@ -183,11 +187,11 @@
 .form-group textarea {
   width: 100%;
   padding: 14px 16px;
-  border-radius: 12px;
+  border-radius: 14px;
   border: 1px solid #ddd;
   background: #fafafa;
   font-size: 15px;
-  transition: 0.3s;
+  transition: 0.25s;
 }
 
 .form-group input:focus,
@@ -195,7 +199,7 @@
 .form-group select:focus {
   border-color: var(--pink);
   background: #fff;
-  box-shadow: 0 0 0 3px rgba(255, 80, 130, 0.15);
+  box-shadow: 0 0 0 3px rgba(255,80,130,0.15);
 }
 
 textarea {
@@ -209,109 +213,111 @@ textarea {
   background: var(--pink);
   color: white;
   border: none;
-  font-size: 18px;
-  border-radius: 12px;
+  font-size: 17px;
+  border-radius: 14px;
   cursor: pointer;
   transition: 0.3s;
 }
 
 .submit-btn:hover {
   background: var(--pink-dark);
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 
-/* -----------------------------------
-      MAP SECTION
------------------------------------ */
+/* ===============================
+   MAP SECTION
+=============================== */
 .map-box {
-  margin-top: 20px;
-  padding: 0 120px 80px;
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 40px 80px;
 }
 
-.map-box h2 {
+.map-title {
   text-align: center;
   font-size: 28px;
   color: var(--pink);
+  margin-bottom: 6px;
+}
+
+.map-sub {
+  text-align: center;
+  font-size: 15px;
+  opacity: 0.75;
   margin-bottom: 20px;
 }
 
 .map-box iframe {
   width: 100%;
-  height: 380px;
-  border: none;
-  border-radius: 20px;
+  height: 360px;
+  border-radius: 22px;
   box-shadow: var(--shadow-card);
 }
 
-/* -----------------------------------
-      RESPONSIVE DESIGN
------------------------------------ */
-
-/* Tablets */
+/* ===============================
+   TABLET
+=============================== */
 @media (max-width: 900px) {
   .contact-container {
-    flex-direction: column;
-    padding: 50px 40px;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 60px 32px;
+  }
+
+  .map-box {
+    padding: 0 32px 60px;
+  }
+}
+
+/* ===============================
+   MOBILE – SWIGGY FEEL
+=============================== */
+@media (max-width: 600px) {
+  .contact-hero {
+    padding: 90px 20px 60px;
+  }
+
+  .contact-hero h1 {
+    font-size: 34px;
+  }
+
+  .contact-hero p {
+    font-size: 16px;
+  }
+
+  .contact-container {
+    padding: 40px 16px;
   }
 
   .contact-info,
   .contact-form {
-    width: 100%;
-  }
-
-  .map-box {
-    padding: 0 40px 60px;
-  }
-}
-
-/* Mobile */
-@media (max-width: 600px) {
-  .contact-hero h1 {
-    font-size: 38px;
-  }
-
-  .contact-hero p {
-    font-size: 17px;
-  }
-
-  .contact-container {
-    padding: 40px 20px;
+    padding: 28px;
   }
 
   .insta-card {
-    padding: 14px 16px;
+    padding: 14px;
     gap: 12px;
   }
 
   .map-box {
-    padding: 0 20px 50px;
+    padding: 0 16px 50px;
   }
 
   .map-box iframe {
-    height: 300px;
+    height: 280px;
   }
 }
 
-/* Extra Small Phones */
-@media (max-width: 400px) {
+/* ===============================
+   VERY SMALL PHONES
+=============================== */
+@media (max-width: 380px) {
   .contact-hero h1 {
-    font-size: 32px;
+    font-size: 30px;
   }
 
   .insta-avatar {
-    width: 50px;
-    height: 50px;
+    width: 48px;
+    height: 48px;
   }
-}
-.insta-follow-btn {
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-.insta-follow-btn {
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
 }
