@@ -1,6 +1,6 @@
 :root {
   --pink: #ff4f88;
-  --text-dark: #222;
+  --text-dark: #333;
   --beige-light: #f9f4e8;
 }
 
@@ -9,9 +9,9 @@
 =================================== */
 .cake-details-section {
   margin-top: 80px;
-  padding: 50px 80px;
-  background: var(--beige-light);
+  padding: 60px 100px;
   font-family: 'Quicksand', sans-serif;
+  background: var(--beige-light);
 }
 
 .cake-details-container {
@@ -24,7 +24,7 @@
 =================================== */
 .left-column {
   display: flex;
-  gap: 16px;
+  gap: 20px;
 }
 
 .thumbnail-list {
@@ -34,12 +34,12 @@
 }
 
 .thumbnail {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   border-radius: 10px;
   object-fit: cover;
   cursor: pointer;
-  border: 2px solid transparent;
+  border: 3px solid transparent;
 }
 
 .thumbnail.active {
@@ -51,8 +51,8 @@
 }
 
 .main-image {
-  width: 520px;
-  height: 460px;
+  width: 540px;
+  height: 480px;
   border-radius: 14px;
   object-fit: cover;
 }
@@ -60,12 +60,12 @@
 /* BADGE */
 .eggless-badge {
   position: absolute;
-  top: 12px;
-  left: 12px;
+  top: 14px;
+  left: 14px;
   background: #00c853;
   color: #fff;
-  font-size: 12px;
-  padding: 4px 8px;
+  font-size: 13px;
+  padding: 5px 10px;
   border-radius: 6px;
   font-weight: 600;
 }
@@ -78,42 +78,41 @@
 }
 
 .cake-title {
-  font-size: 30px;
+  font-size: 32px;
   font-weight: 700;
 }
 
 .cake-price {
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 700;
   margin: 10px 0;
 }
 
-.gst {
-  font-size: 12px;
-  opacity: 0.7;
-}
-
 .cake-description {
-  font-size: 15px;
+  margin: 12px 0 20px;
   line-height: 1.6;
-  margin: 12px 0 18px;
 }
 
 /* ===================================
    KG SELECTOR
 =================================== */
+.section-heading {
+  font-size: 20px;
+  font-weight: 600;
+}
+
 .kg-selector {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  margin: 18px 0;
+  margin: 16px 0 20px;
 }
 
 .kg-btn {
   min-width: 70px;
   padding: 10px 18px;
   border-radius: 999px;
-  border: 1.6px solid #ddd;
+  border: 1.8px solid #ddd;
   background: #fff;
   font-size: 14px;
   font-weight: 600;
@@ -127,16 +126,11 @@
 }
 
 /* MESSAGE */
-.section-heading {
-  font-size: 18px;
-  font-weight: 600;
-}
-
 .cake-message-box {
   width: 100%;
-  height: 70px;
-  padding: 10px;
+  height: 80px;
   border-radius: 10px;
+  padding: 10px;
   border: 1px solid #ccc;
   margin-top: 10px;
 }
@@ -145,19 +139,20 @@
 .buy-btn {
   width: 100%;
   background: var(--pink);
-  color: #fff;
-  font-size: 18px;
-  padding: 14px;
-  border-radius: 12px;
+  color: white;
+  font-size: 20px;
+  margin-top: 20px;
+  padding: 16px;
   border: none;
-  margin-top: 18px;
+  border-radius: 12px;
 }
 
 .add-cart-btn {
   width: 100%;
-  margin-top: 10px;
-  padding: 13px;
+  margin-top: 12px;
+  padding: 14px;
   font-size: 16px;
+  font-weight: 700;
   border-radius: 12px;
   border: 2px solid var(--pink);
   background: transparent;
@@ -167,7 +162,7 @@
 /* WISHLIST */
 .wishlist-icon {
   font-size: 26px;
-  margin-top: 14px;
+  margin-top: 16px;
   cursor: pointer;
   color: #999;
 }
@@ -177,11 +172,10 @@
 }
 
 /* ===================================
-   YOU MAY ALSO LIKE – FORCE FIX
-   (WORKS WITH CURRENT JSX)
+   YOU MAY ALSO LIKE – DESKTOP (FIXED)
 =================================== */
 .suggest-section {
-  padding: 50px 80px;
+  padding: 50px 100px;
   background: var(--beige-light);
 }
 
@@ -193,14 +187,15 @@
 }
 
 .suggest-header h2 {
-  font-size: 28px;
+  font-size: 30px;
   font-weight: 700;
 }
 
+/* GRID */
 .suggest-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 28px;
+  gap: 30px;
 }
 
 /* CARD */
@@ -211,7 +206,7 @@
 /* IMAGE */
 .suggest-card img {
   width: 100%;
-  height: 260px;
+  height: 260px;           /* 🔥 desktop perfect size */
   object-fit: cover;
   border-radius: 16px;
   background: #eee;
@@ -219,7 +214,7 @@
 
 /* TITLE */
 .suggest-card h4 {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   margin: 10px 0 6px;
   line-height: 1.3;
@@ -232,23 +227,40 @@
 
 /* PRICE */
 .suggest-card p {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   margin: 0;
 }
 
 /* ===================================
-   📱 MOBILE (SWIGGY STYLE)
+   TABLET
 =================================== */
-@media (max-width: 600px) {
-
+@media (max-width: 992px) {
   .cake-details-section {
-    padding: 24px 16px;
+    padding: 50px 40px;
   }
 
   .cake-details-container {
     flex-direction: column;
-    gap: 20px;
+  }
+
+  .main-image {
+    width: 100%;
+    height: 420px;
+  }
+
+  .suggest-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ===================================
+   MOBILE – SWIGGY STYLE
+=================================== */
+@media (max-width: 600px) {
+
+  .cake-details-section {
+    padding: 40px 20px;
   }
 
   .left-column {
@@ -263,8 +275,8 @@
   }
 
   .thumbnail {
-    width: 56px;
-    height: 56px;
+    width: 60px;
+    height: 60px;
   }
 
   .main-image {
@@ -273,30 +285,26 @@
   }
 
   .cake-title {
-    font-size: 20px;
+    font-size: 22px;
   }
 
   .cake-price {
-    font-size: 18px;
+    font-size: 20px;
   }
 
-  .cake-description {
-    font-size: 13px;
-  }
-
-  /* SUGGEST – MOBILE SLIDER */
+  /* SUGGEST – HORIZONTAL SLIDER */
   .suggest-section {
-    padding: 28px 16px;
+    padding: 30px 20px;
   }
 
   .suggest-header h2 {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .suggest-grid {
     display: flex;
-    gap: 16px;
     overflow-x: auto;
+    gap: 16px;
     scrollbar-width: none;
   }
 
@@ -305,8 +313,7 @@
   }
 
   .suggest-card {
-    min-width: 200px;
-    flex: 0 0 auto;
+    min-width: 220px;
   }
 
   .suggest-card img {
@@ -315,6 +322,6 @@
 
   .suggest-card h4,
   .suggest-card p {
-    font-size: 13px;
+    font-size: 14px;
   }
 }
