@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import "./SingleCake.css";
 import { FiHeart } from "react-icons/fi";
 import API from "../api";
-import SingleCakeReview from "../SingleCakesReview/SIngleCakeReview";
+import SingleCakeReview from "../SingleCakesReview/SingleCakeReview";
 
 const BACKEND_URL = "https://sweettooth-backend.onrender.com";
 
@@ -13,7 +13,7 @@ export default function SingleCake() {
 
   const [cake, setCake] = useState(null);
   const [allProducts, setAllProducts] = useState([]);
-  const [activeImg, setActiveImg] = useState("");
+  const [activeImg, setActiveImg] = useState(null);
   const [wishlist, setWishlist] = useState(false);
 
   const [selectedKg, setSelectedKg] = useState("1");
@@ -24,18 +24,28 @@ export default function SingleCake() {
 
   /* ================= FETCH PRODUCT ================= */
   useEffect(() => {
-    API.get(`/products/${id}`).then((res) => {
-      setCake(res.data);
-      setActiveImg(res.data.images?.[0]);
+    const fetchData = async () => {
+      try {
+        const productRes = await API.get(`/products/${id}`);
+        const product = productRes.data;
 
-      if (res.data.priceByKg?.["1"]) {
-        setPrice(res.data.priceByKg["1"]);
+        setCake(product);
+
+        const firstImg = product.images?.[0] || null;
+        setActiveImg(firstImg);
+
+        if (product.priceByKg?.["1"]) {
+          setPrice(product.priceByKg["1"]);
+        }
+
+        const allRes = await API.get("/products");
+        setAllProducts(allRes.data);
+      } catch (err) {
+        console.error("Product fetch error", err);
       }
-    });
+    };
 
-    API.get("/products").then((res) => {
-      setAllProducts(res.data);
-    });
+    fetchData();
   }, [id]);
 
   /* ================= CHECK WISHLIST ================= */
@@ -48,7 +58,9 @@ export default function SingleCake() {
     });
   }, [id]);
 
-  if (!cake) return <p style={{ textAlign: "center" }}>Loading...</p>;
+  if (!cake) {
+    return <p style={{ textAlign: "center" }}>Loading...</p>;
+  }
 
   const related = allProducts.filter(
     (p) => p.category === cake.category && p._id !== cake._id
@@ -71,7 +83,7 @@ export default function SingleCake() {
         price,
         qty: 1,
         kg: selectedKg,
-        img: cake.images[0],
+        img: cake.images?.[0],
         message,
       });
 
@@ -112,13 +124,16 @@ export default function SingleCake() {
           {/* LEFT – IMAGE */}
           <div className="left-column">
             <div className="thumbnail-list">
-              {cake.images.map((img, i) => (
+              {cake.images?.map((img, i) => (
                 <img
                   key={i}
                   src={`${BACKEND_URL}${img}`}
                   className={`thumbnail ${activeImg === img ? "active" : ""}`}
                   onClick={() => setActiveImg(img)}
-                  alt=""
+                  alt="thumbnail"
+                  onError={(e) => {
+                    e.currentTarget.src = "/placeholder-cake.jpg";
+                  }}
                 />
               ))}
             </div>
@@ -128,11 +143,17 @@ export default function SingleCake() {
                 <span className="eggless-badge">EGGLESS</span>
               )}
 
-              <img
-                src={`${BACKEND_URL}${activeImg}`}
-                className="main-image"
-                alt={cake.title}
-              />
+              {/* 🔥 IMPORTANT: conditional render */}
+              {activeImg && (
+                <img
+                  src={`${BACKEND_URL}${activeImg}`}
+                  className="main-image"
+                  alt={cake.title}
+                  onError={(e) => {
+                    e.currentTarget.src = "/placeholder-cake.jpg";
+                  }}
+                />
+              )}
             </div>
           </div>
 
@@ -210,8 +231,11 @@ export default function SingleCake() {
                 onClick={() => navigate(`/cake/${item._id}`)}
               >
                 <img
-                  src={`${BACKEND_URL}${item.images[0]}`}
+                  src={`${BACKEND_URL}${item.images?.[0]}`}
                   alt={item.title}
+                  onError={(e) => {
+                    e.currentTarget.src = "/placeholder-cake.jpg";
+                  }}
                 />
                 <h4>{item.title}</h4>
                 <p>From ₹{item.priceByKg?.["1"]}</p>
@@ -219,7 +243,8 @@ export default function SingleCake() {
             ))}
           </div>
 
-          <SingleCakeReview />
+          {/* 🔥 REVIEW FIX */}
+          <SingleCakeReview productId={cake._id} />
         </section>
       )}
     </>
