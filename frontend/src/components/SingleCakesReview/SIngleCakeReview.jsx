@@ -14,7 +14,7 @@ export default function SingleCakeReview() {
     rating: 5,
   });
 
-  /* FETCH PRODUCT REVIEWS */
+  /* FETCH REVIEWS */
   useEffect(() => {
     if (!productId) return;
 
@@ -23,14 +23,13 @@ export default function SingleCakeReview() {
       .catch(console.error);
   }, [productId]);
 
-  /* SUBMIT PRODUCT REVIEW */
+  /* SUBMIT REVIEW */
   const submitReview = async (e) => {
     e.preventDefault();
     if (!productId) return;
 
     const res = await API.post(`/reviews/${productId}`, newReview);
     setReviews([res.data, ...reviews]);
-
     setNewReview({ name: "", review: "", rating: 5 });
   };
 
@@ -43,9 +42,7 @@ export default function SingleCakeReview() {
       {/* SUMMARY */}
       <div className="review-summary">
         <h2>Customer Reviews</h2>
-        <div className="big-rating">
-          {avgRating.toFixed(1)}
-        </div>
+        <div className="big-rating">{avgRating.toFixed(1)}</div>
 
         <div className="stars">
           {[...Array(5)].map((_, i) =>
@@ -103,10 +100,7 @@ export default function SingleCakeReview() {
             required
             value={newReview.review}
             onChange={(e) =>
-              setNewReview({
-                ...newReview,
-                review: e.target.value,
-              })
+              setNewReview({ ...newReview, review: e.target.value })
             }
           />
 
@@ -117,10 +111,7 @@ export default function SingleCakeReview() {
                   key={n}
                   className="star-select filled"
                   onClick={() =>
-                    setNewReview({
-                      ...newReview,
-                      rating: n,
-                    })
+                    setNewReview({ ...newReview, rating: n })
                   }
                 />
               ) : (
@@ -128,10 +119,7 @@ export default function SingleCakeReview() {
                   key={n}
                   className="star-select"
                   onClick={() =>
-                    setNewReview({
-                      ...newReview,
-                      rating: n,
-                    })
+                    setNewReview({ ...newReview, rating: n })
                   }
                 />
               )
