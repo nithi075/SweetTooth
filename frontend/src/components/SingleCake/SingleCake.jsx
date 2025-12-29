@@ -4,7 +4,6 @@ import "./SingleCake.css";
 import { FiHeart } from "react-icons/fi";
 import API from "../api";
 import SingleCakeReview from "../SingleCakesReview/SingleCakeReview";
-
 const BACKEND_URL = "https://sweettooth-backend.onrender.com";
 
 export default function SingleCake() {
