@@ -257,6 +257,9 @@
 /* ===================================
    MOBILE – SWIGGY STYLE
 =================================== */
+/* ===================================
+   MOBILE – SWIGGY STYLE (FIXED IMAGE)
+=================================== */
 @media (max-width: 600px) {
 
   .cake-details-section {
@@ -277,11 +280,17 @@
   .thumbnail {
     width: 60px;
     height: 60px;
+    flex-shrink: 0;
   }
 
+  /* 🔥 MAIN CAKE IMAGE – SWIGGY STYLE */
   .main-image {
     width: 100%;
-    height: 300px;
+    aspect-ratio: 1 / 1;     /* ✅ SAME SIZE ALWAYS */
+    height: auto;
+    max-height: 340px;
+    object-fit: cover;
+    border-radius: 14px;
   }
 
   .cake-title {
@@ -292,7 +301,9 @@
     font-size: 20px;
   }
 
-  /* SUGGEST – HORIZONTAL SLIDER */
+  /* ===============================
+     SUGGEST – HORIZONTAL SLIDER
+  =============================== */
   .suggest-section {
     padding: 30px 20px;
   }
@@ -314,10 +325,16 @@
 
   .suggest-card {
     min-width: 220px;
+    flex-shrink: 0;
   }
 
+  /* 🔥 SUGGEST CARD IMAGE – FIXED */
   .suggest-card img {
-    height: 200px;
+    width: 100%;
+    aspect-ratio: 1 / 1;     /* ✅ ALL SAME SIZE */
+    height: auto;
+    object-fit: cover;
+    border-radius: 14px;
   }
 
   .suggest-card h4,
@@ -325,3 +342,4 @@
     font-size: 14px;
   }
 }
+
