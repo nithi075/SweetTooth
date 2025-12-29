@@ -11,7 +11,7 @@ const router = express.Router();
 router.get("/", getProducts);
 router.get("/:id", getSingleProduct);
 
-// 🔥 Cloudinary upload
+// 🔥 ONLY ONE POST ROUTE
 router.post("/", upload.array("images", 5), createProduct);
 
 export default router;

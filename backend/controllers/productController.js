@@ -42,7 +42,7 @@ export const getSingleProduct = async (req, res) => {
 };
 
 /* =========================
-   CREATE PRODUCT (🔥 CLOUDINARY)
+   CREATE PRODUCT (CLOUDINARY)
 ========================= */
 export const createProduct = async (req, res) => {
   try {
@@ -50,7 +50,6 @@ export const createProduct = async (req, res) => {
       return res.status(400).json({ error: "No images uploaded" });
     }
 
-    // 🔥 Upload to Cloudinary
     const imageUrls = [];
 
     for (const file of req.files) {
@@ -65,7 +64,7 @@ export const createProduct = async (req, res) => {
     try {
       priceByKg = JSON.parse(req.body.priceByKg);
     } catch {
-      return res.status(400).json({ error: "Invalid priceByKg" });
+      return res.status(400).json({ error: "Invalid priceByKg format" });
     }
 
     const product = new Product({
@@ -73,7 +72,7 @@ export const createProduct = async (req, res) => {
       priceByKg,
       rating: Number(req.body.rating || 0),
       reviews: req.body.reviews || "",
-      images: imageUrls, // ✅ FIXED
+      images: imageUrls,
       category: req.body.category,
       flavor: req.body.flavor,
       occasion: req.body.occasion,
