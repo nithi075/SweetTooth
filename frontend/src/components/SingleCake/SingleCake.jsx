@@ -215,22 +215,34 @@ export default function SingleCake() {
             <h2>You May Also Like</h2>
           </div>
 
-          <div className="suggest-grid">
-            {related.slice(0, 4).map((item) => (
-              <div
-                key={item._id}
-                className="suggest-card"
-                onClick={() => navigate(`/cake/${item._id}`)}
-              >
-                <img
-                  src={item.images[0]} // 🔥 FIXED
-                  alt={item.title}
-                />
-                <h4>{item.title}</h4>
-                <p>From ₹{item.priceByKg?.["1"]}</p>
-              </div>
-            ))}
-          </div>
+       <div className="suggest-grid">
+  {related.slice(0, 4).map((item) => (
+    <div
+      key={item._id}
+      className="suggest-card"
+      onClick={() => navigate(`/cake/${item._id}`)}
+    >
+      <div className="suggest-img-box">
+        <img
+          src={item.images[0]}
+          alt={item.title}
+          className="suggest-img"
+        />
+
+        {item.bestseller && (
+          <span className="suggest-badge">Best Seller</span>
+        )}
+      </div>
+
+      <h4 className="suggest-title">{item.title}</h4>
+
+      <div className="suggest-bottom">
+        <p className="suggest-price">₹{item.priceByKg?.["1"]}</p>
+        <FiHeart className="wishlist-icon" />
+      </div>
+    </div>
+  ))}
+</div>
 
           <SingleCakeReview />
         </section>
