@@ -1,4 +1,5 @@
 import Product from "../models/Product.js";
+import cloudinary from "../config/cloudinary.js";
 
 /* =========================
    GET ALL PRODUCTS
@@ -41,7 +42,7 @@ export const getSingleProduct = async (req, res) => {
 };
 
 /* =========================
-   CREATE PRODUCT (LOCAL UPLOAD)
+   CREATE PRODUCT (🔥 CLOUDINARY)
 ========================= */
 export const createProduct = async (req, res) => {
   try {
@@ -49,16 +50,22 @@ export const createProduct = async (req, res) => {
       return res.status(400).json({ error: "No images uploaded" });
     }
 
-    // 🔥 LOCAL IMAGE PATHS
-    const imagePaths = req.files.map(
-      (file) => `/uploads/${file.filename}`
-    );
+    // 🔥 Upload to Cloudinary
+    const imageUrls = [];
+
+    for (const file of req.files) {
+      const result = await cloudinary.uploader.upload(
+        `data:${file.mimetype};base64,${file.buffer.toString("base64")}`,
+        { folder: "sweettooth_cakes" }
+      );
+      imageUrls.push(result.secure_url);
+    }
 
     let priceByKg;
     try {
       priceByKg = JSON.parse(req.body.priceByKg);
-    } catch (err) {
-      return res.status(400).json({ error: "Invalid priceByKg format" });
+    } catch {
+      return res.status(400).json({ error: "Invalid priceByKg" });
     }
 
     const product = new Product({
@@ -66,7 +73,7 @@ export const createProduct = async (req, res) => {
       priceByKg,
       rating: Number(req.body.rating || 0),
       reviews: req.body.reviews || "",
-      images: imagePaths,
+      images: imageUrls, // ✅ FIXED
       category: req.body.category,
       flavor: req.body.flavor,
       occasion: req.body.occasion,
@@ -75,7 +82,6 @@ export const createProduct = async (req, res) => {
     });
 
     await product.save();
-
     res.status(201).json(product);
   } catch (err) {
     console.error("CREATE PRODUCT ERROR:", err);

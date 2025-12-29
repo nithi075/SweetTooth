@@ -11,7 +11,7 @@ const router = express.Router();
 router.get("/", getProducts);
 router.get("/:id", getSingleProduct);
 
-// 🔥 CREATE PRODUCT (with images)
+// 🔥 Cloudinary upload
 router.post("/", upload.array("images", 5), createProduct);
 
 export default router;
