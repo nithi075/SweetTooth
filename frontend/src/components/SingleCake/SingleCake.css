@@ -171,3 +171,59 @@
     min-width: 220px;
   }
 }
+/* =========================
+   🧁 KG SELECTOR – SWIGGY STYLE
+========================= */
+
+.kg-selector {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 18px 0 22px;
+}
+
+/* DEFAULT */
+.kg-btn {
+  min-width: 70px;
+  padding: 10px 18px;
+  border-radius: 999px;           /* 🔥 pill shape */
+  border: 1.8px solid #ddd;
+  background: #fff;
+  color: #333;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* HOVER */
+.kg-btn:hover {
+  border-color: var(--pink);
+  color: var(--pink);
+}
+
+/* ACTIVE (SELECTED) */
+.kg-btn.active {
+  background: var(--pink);
+  color: #fff;
+  border-color: var(--pink);
+  box-shadow: 0 6px 14px rgba(255, 79, 136, 0.35);
+  transform: translateY(-1px);
+}
+
+/* DISABLED (future proof) */
+.kg-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+@media (max-width: 600px) {
+  .kg-selector {
+    gap: 10px;
+  }
+
+  .kg-btn {
+    min-width: 60px;
+    padding: 9px 14px;
+    font-size: 13px;
+  }
+}
