@@ -40,6 +40,7 @@
   object-fit: cover;
   cursor: pointer;
   border: 3px solid transparent;
+  flex-shrink: 0;
 }
 
 .thumbnail.active {
@@ -48,11 +49,12 @@
 
 .main-image-box {
   position: relative;
+  width: 540px;
 }
 
 .main-image {
-  width: 540px;
-  height: 480px;
+  width: 100%;
+  aspect-ratio: 4 / 3;
   border-radius: 14px;
   object-fit: cover;
 }
@@ -145,6 +147,7 @@
   padding: 16px;
   border: none;
   border-radius: 12px;
+  cursor: pointer;
 }
 
 .add-cart-btn {
@@ -157,6 +160,7 @@
   border: 2px solid var(--pink);
   background: transparent;
   color: var(--pink);
+  cursor: pointer;
 }
 
 /* WISHLIST */
@@ -172,7 +176,7 @@
 }
 
 /* ===================================
-   YOU MAY ALSO LIKE – DESKTOP (FIXED)
+   YOU MAY ALSO LIKE – DESKTOP
 =================================== */
 .suggest-section {
   padding: 50px 100px;
@@ -206,7 +210,7 @@
 /* IMAGE */
 .suggest-card img {
   width: 100%;
-  height: 260px;           /* 🔥 desktop perfect size */
+  aspect-ratio: 1 / 1;          /* 🔥 FIXED SIZE */
   object-fit: cover;
   border-radius: 16px;
   background: #eee;
@@ -244,9 +248,12 @@
     flex-direction: column;
   }
 
-  .main-image {
+  .main-image-box {
     width: 100%;
-    height: 420px;
+  }
+
+  .main-image {
+    aspect-ratio: 4 / 3;
   }
 
   .suggest-grid {
@@ -255,10 +262,7 @@
 }
 
 /* ===================================
-   MOBILE – SWIGGY STYLE
-=================================== */
-/* ===================================
-   MOBILE – SWIGGY STYLE (FIXED IMAGE)
+   MOBILE – SWIGGY STYLE (FIXED)
 =================================== */
 @media (max-width: 600px) {
 
@@ -280,17 +284,17 @@
   .thumbnail {
     width: 60px;
     height: 60px;
-    flex-shrink: 0;
   }
 
-  /* 🔥 MAIN CAKE IMAGE – SWIGGY STYLE */
+  /* 🔥 MAIN IMAGE */
+  .main-image-box {
+    width: 100%;
+  }
+
   .main-image {
     width: 100%;
-    aspect-ratio: 1 / 1;     /* ✅ SAME SIZE ALWAYS */
-    height: auto;
-    max-height: 340px;
+    aspect-ratio: 1 / 1;     /* 🔥 SWIGGY STYLE */
     object-fit: cover;
-    border-radius: 14px;
   }
 
   .cake-title {
@@ -301,9 +305,7 @@
     font-size: 20px;
   }
 
-  /* ===============================
-     SUGGEST – HORIZONTAL SLIDER
-  =============================== */
+  /* SUGGEST SLIDER */
   .suggest-section {
     padding: 30px 20px;
   }
@@ -328,13 +330,10 @@
     flex-shrink: 0;
   }
 
-  /* 🔥 SUGGEST CARD IMAGE – FIXED */
   .suggest-card img {
     width: 100%;
-    aspect-ratio: 1 / 1;     /* ✅ ALL SAME SIZE */
-    height: auto;
+    aspect-ratio: 1 / 1;     /* 🔥 SAME SIZE */
     object-fit: cover;
-    border-radius: 14px;
   }
 
   .suggest-card h4,
@@ -342,4 +341,3 @@
     font-size: 14px;
   }
 }
-
