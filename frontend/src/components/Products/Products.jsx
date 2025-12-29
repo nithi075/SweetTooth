@@ -5,7 +5,6 @@ import API from "../api";
 import { useNavigate } from "react-router-dom";
 
 /* ================= BACKEND URL ================= */
-// Best practice: env var (fallback included)
 const BACKEND_URL =
   import.meta.env.VITE_BACKEND_URL ||
   "https://sweettooth-backend.onrender.com";
@@ -56,9 +55,9 @@ export default function IndiaLoves() {
   const getImageUrl = (cake) => {
     const img = cake.images?.[0];
 
-    if (!img) return "/placeholder-cake.jpg"; // local fallback
+    if (!img) return "/placeholder-cake.jpg";
 
-    // Cloudinary / external image
+    // External (Cloudinary etc.)
     if (img.startsWith("http")) return img;
 
     // Backend uploads
@@ -72,49 +71,56 @@ export default function IndiaLoves() {
 
       {/* 🔥 HORIZONTAL SCROLL LIST */}
       <div className="il-grid">
-        {cakes.slice(0, 8).map((cake) => (
-          <div
-            className="il-card"
-            key={cake._id}
-            onClick={() => navigate(`/cake/${cake._id}`)}
-          >
-            {/* IMAGE */}
-            <div className="il-img-box">
-              <img
-                src={getImageUrl(cake)}
-                alt={cake.title}
-                className="il-img"
-                loading="lazy"
-                onError={(e) => {
-                  e.target.src = "/placeholder-cake.jpg";
-                }}
-              />
-            </div>
+        {cakes.slice(0, 8).map((cake) => {
+          const imageSrc = `${getImageUrl(cake)}?t=${
+            cake.updatedAt || Date.now()
+          }`;
 
-            {/* CONTENT */}
-            <div className="il-content">
-              <h3 className="il-name">{cake.title}</h3>
-
-              <div className="price-heart-row">
-                <p className="il-price">
-                  ₹{cake.priceByKg?.["1"]}
-                </p>
-
-                <FiHeart
-                  className={`heart ${
-                    wishlist.includes(cake._id) ? "active" : ""
-                  }`}
-                  onClick={(e) => toggleWishlist(cake, e)}
+          return (
+            <div
+              className="il-card"
+              key={cake._id}
+              onClick={() => navigate(`/cake/${cake._id}`)}
+            >
+              {/* IMAGE */}
+              <div className="il-img-box">
+                <img
+                  key={`${cake._id}-${cake.updatedAt}`}
+                  src={imageSrc}
+                  alt={cake.title}
+                  className="il-img"
+                  loading="eager"
+                  onError={(e) => {
+                    e.target.src = "/placeholder-cake.jpg";
+                  }}
                 />
               </div>
 
-              <div className="il-rating">
-                <span className="star">★</span>
-                <span>{cake.rating || 4.5}</span>
+              {/* CONTENT */}
+              <div className="il-content">
+                <h3 className="il-name">{cake.title}</h3>
+
+                <div className="price-heart-row">
+                  <p className="il-price">
+                    ₹{cake.priceByKg?.["1"]}
+                  </p>
+
+                  <FiHeart
+                    className={`heart ${
+                      wishlist.includes(cake._id) ? "active" : ""
+                    }`}
+                    onClick={(e) => toggleWishlist(cake, e)}
+                  />
+                </div>
+
+                <div className="il-rating">
+                  <span className="star">★</span>
+                  <span>{cake.rating || 4.5}</span>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* 🔥 VIEW ALL */}
