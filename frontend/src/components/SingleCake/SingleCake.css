@@ -40,7 +40,6 @@
   object-fit: cover;
   cursor: pointer;
   border: 3px solid transparent;
-  flex-shrink: 0;
 }
 
 .thumbnail.active {
@@ -49,12 +48,11 @@
 
 .main-image-box {
   position: relative;
-  width: 540px;
 }
 
 .main-image {
-  width: 100%;
-  aspect-ratio: 4 / 3;
+  width: 540px;
+  height: 480px;
   border-radius: 14px;
   object-fit: cover;
 }
@@ -147,7 +145,6 @@
   padding: 16px;
   border: none;
   border-radius: 12px;
-  cursor: pointer;
 }
 
 .add-cart-btn {
@@ -160,7 +157,6 @@
   border: 2px solid var(--pink);
   background: transparent;
   color: var(--pink);
-  cursor: pointer;
 }
 
 /* WISHLIST */
@@ -176,7 +172,7 @@
 }
 
 /* ===================================
-   YOU MAY ALSO LIKE – DESKTOP
+   YOU MAY ALSO LIKE – DESKTOP (FIXED)
 =================================== */
 .suggest-section {
   padding: 50px 100px;
@@ -210,7 +206,7 @@
 /* IMAGE */
 .suggest-card img {
   width: 100%;
-  aspect-ratio: 1 / 1;          /* 🔥 FIXED SIZE */
+  height: 260px;           /* 🔥 desktop perfect size */
   object-fit: cover;
   border-radius: 16px;
   background: #eee;
@@ -248,12 +244,9 @@
     flex-direction: column;
   }
 
-  .main-image-box {
-    width: 100%;
-  }
-
   .main-image {
-    aspect-ratio: 4 / 3;
+    width: 100%;
+    height: 420px;
   }
 
   .suggest-grid {
@@ -262,7 +255,7 @@
 }
 
 /* ===================================
-   MOBILE – SWIGGY STYLE (FIXED)
+   MOBILE – SWIGGY STYLE
 =================================== */
 @media (max-width: 600px) {
 
@@ -286,15 +279,9 @@
     height: 60px;
   }
 
-  /* 🔥 MAIN IMAGE */
-  .main-image-box {
-    width: 100%;
-  }
-
   .main-image {
     width: 100%;
-    aspect-ratio: 1 / 1;     /* 🔥 SWIGGY STYLE */
-    object-fit: cover;
+    height: 300px;
   }
 
   .cake-title {
@@ -305,7 +292,7 @@
     font-size: 20px;
   }
 
-  /* SUGGEST SLIDER */
+  /* SUGGEST – HORIZONTAL SLIDER */
   .suggest-section {
     padding: 30px 20px;
   }
@@ -327,13 +314,10 @@
 
   .suggest-card {
     min-width: 220px;
-    flex-shrink: 0;
   }
 
   .suggest-card img {
-    width: 100%;
-    aspect-ratio: 1 / 1;     /* 🔥 SAME SIZE */
-    object-fit: cover;
+    height: 200px;
   }
 
   .suggest-card h4,
