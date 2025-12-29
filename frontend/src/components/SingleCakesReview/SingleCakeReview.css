@@ -48,38 +48,37 @@
 }
 
 /* ===============================
-   REVIEW CARDS GRID (DESKTOP)
+   REVIEW CARDS GRID – DESKTOP
 =============================== */
 .review-cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 28px;
+  gap: 26px;
 }
 
 /* ===============================
-   REVIEW CARD (FIXED SIZE)
+   REVIEW CARD – FINAL STYLE
 =============================== */
 .review-card {
-  background: var(--card-bg);
-  padding: 20px;
-  border-radius: 20px;
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
+  background: #fff;
+  padding: 22px;
+  border-radius: 18px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.1);
 
-  height: 260px;            /* 🔥 FIXED HEIGHT */
+  height: 240px;                 /* 🔥 FIXED HEIGHT */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .review-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.14);
 }
 
 /* ===============================
-   CONTENT
+   CARD CONTENT
 =============================== */
 .review-content-box {
   display: flex;
@@ -89,23 +88,25 @@
 
 /* STARS */
 .rating-row {
+  display: flex;
+  gap: 4px;
   margin-bottom: 8px;
 }
 
 .rating-row .star-icon {
-  color: var(--star);
   font-size: 18px;
-  margin-right: 3px;
+  color: var(--star);
 }
 
-/* REVIEW TEXT (CLAMPED) */
+/* REVIEW TEXT */
 .review-text {
   font-size: 14px;
+  line-height: 1.55;
   color: #444;
-  line-height: 1.5;
+  opacity: 0.85;
 
   display: -webkit-box;
-  -webkit-line-clamp: 3;      /* 🔥 MAX 3 LINES */
+  -webkit-line-clamp: 3;        /* 🔥 SAME HEIGHT */
   -webkit-box-orient: vertical;
   overflow: hidden;
 
@@ -119,6 +120,7 @@
 
 .review-user-details h4 {
   font-size: 15px;
+  font-weight: 600;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -161,7 +163,9 @@ textarea {
   resize: none;
 }
 
-/* STAR SELECT */
+/* ===============================
+   STAR SELECT (WRITE)
+=============================== */
 .rating-select {
   display: flex;
   gap: 10px;
@@ -183,7 +187,9 @@ textarea {
   color: var(--star);
 }
 
-/* BUTTON */
+/* ===============================
+   SUBMIT BUTTON
+=============================== */
 .submit-review-btn {
   width: 100%;
   padding: 14px;
@@ -204,7 +210,7 @@ textarea {
 /* ===============================
    MOBILE – SWIGGY SLIDER
 =============================== */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .cake-review-section {
     padding: 32px 18px;
   }
@@ -223,15 +229,27 @@ textarea {
 
   .review-card {
     flex: 0 0 260px;        /* 🔥 SWIGGY WIDTH */
-    height: 300px;
+    height: 280px;
     scroll-snap-align: start;
   }
 }
 
-/* EXTRA SMALL */
+/* ===============================
+   SMALL PHONES
+=============================== */
+@media (max-width: 480px) {
+  .review-card {
+    flex: 0 0 230px;
+    height: 260px;
+  }
+}
+
+/* ===============================
+   VERY SMALL PHONES
+=============================== */
 @media (max-width: 380px) {
   .review-card {
-    flex: 0 0 220px;
-    height: 280px;
+    flex: 0 0 210px;
+    height: 240px;
   }
 }
