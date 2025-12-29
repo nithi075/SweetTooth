@@ -2,10 +2,12 @@ import "./MenuSection.css";
 import { useNavigate } from "react-router-dom";
 
 const categories = [
-  { id: 1, title: "CAKE", value: "cake", img: "/images/menu/menu1.jpg" },
-  { id: 2, title: "DESSERTS", value: "desserts", img: "/images/menu/menu2.jpg" },
+  { id: 1, title: "CLASSIC", value: "classic", img: "/images/menu/menu1.jpg" },
+  { id: 2, title: "GOURMET", value: "gourmet", img: "/images/menu/menu2.jpg" },
   { id: 3, title: "DESIGNER", value: "designer", img: "/images/menu/menu3.jpg" },
-  { id: 4, title: "BROWNIE", value: "brownie", img: "/images/menu/menu4.jpg" },
+  { id: 4, title: "DESSERTS", value: "desserts", img: "/images/menu/menu4.jpg" },
+  { id: 5, title: "COOKIES", value: "cookies", img: "/images/menu/menu5.jpg" },
+  { id: 6, title: "HAMPERS", value: "hampers", img: "/images/menu/menu6.jpg" },
 ];
 
 export default function MenuSection() {
@@ -13,22 +15,19 @@ export default function MenuSection() {
 
   return (
     <section className="menu-section">
-      <h1 className="menu-title">Menu</h1>
+      <h2 className="menu-title">Menu</h2>
       <p className="menu-sub">What will you wish for?</p>
 
       <div className="menu-grid">
         {categories.map((item) => (
           <div
-            className="menu-card"
             key={item.id}
+            className="menu-card"
             onClick={() => navigate(`/treat?category=${item.value}`)}
           >
-            <div className="stars">
-              <span>★</span><span>★</span><span>★</span>
-              <span>★</span><span>★</span>
+            <div className="menu-img-wrapper">
+              <img src={item.img} alt={item.title} />
             </div>
-
-            <img src={item.img} alt={item.title} className="menu-img" />
             <h3 className="menu-name">{item.title}</h3>
           </div>
         ))}

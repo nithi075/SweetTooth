@@ -1,148 +1,90 @@
 :root {
-  --pink: #F28BA8;
-  --white: #FFFFFF;
-  --text-dark: #333333;
-  --beige-light: #EBE8D8;
+  --pink: #f44a6a;
+  --bg: #fdecef;
+  --text: #2d2d2d;
 }
 
-/* ==================================================
-   SECTION
-================================================== */
+/* SECTION */
 .menu-section {
-  width: 100%;
+  padding: clamp(40px, 6vw, 90px) clamp(16px, 5vw, 70px);
+  background: var(--bg);
   text-align: center;
-  padding: clamp(50px, 8vw, 90px) clamp(20px, 6vw, 60px);
-  background: var(--beige-light);
   font-family: 'Quicksand', sans-serif;
 }
 
-/* ==================================================
-   TITLE
-================================================== */
+/* TITLE */
 .menu-title {
-  font-size: clamp(28px, 4vw, 48px);
+  font-size: clamp(28px, 4vw, 44px);
   color: var(--pink);
   font-weight: 700;
-  margin-bottom: 6px;
 }
 
 .menu-sub {
-  font-size: clamp(16px, 2.5vw, 24px);
-  color: var(--text-dark);
-  margin-bottom: clamp(32px, 6vw, 70px);
+  margin-top: 6px;
+  font-size: clamp(15px, 2.3vw, 20px);
+  color: #555;
+  margin-bottom: clamp(30px, 6vw, 60px);
 }
 
-/* ==================================================
-   GRID — DESKTOP + TABLET (FIRST CODE STYLE)
-================================================== */
+/* GRID (SWIGGY STYLE) */
 .menu-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: clamp(18px, 4vw, 40px);
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: clamp(16px, 3vw, 36px);
 }
 
-/* ==================================================
-   CARD — DESKTOP + TABLET
-================================================== */
+/* CARD */
 .menu-card {
-  background: var(--white);
-  padding: 16px;
-  border-radius: 20px;
-  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  position: relative;
   cursor: pointer;
+  transition: transform 0.25s ease;
 }
 
 .menu-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 14px 30px rgba(0,0,0,0.16);
+  transform: translateY(-6px);
 }
 
-/* ==================================================
-   ⭐ STARS — DESKTOP + TABLET
-================================================== */
-.stars {
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 5px;
-  color: #FFD966;
-  font-size: 13px;
-}
-
-/* ==================================================
-   IMAGE — DESKTOP + TABLET
-================================================== */
-.menu-img {
+/* IMAGE */
+.menu-img-wrapper {
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 12px 26px rgba(0,0,0,0.12);
+}
+
+.menu-img-wrapper img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border-radius: 18px;
+  transition: transform 0.4s ease;
 }
 
-/* ==================================================
-   NAME
-================================================== */
+.menu-card:hover img {
+  transform: scale(1.06);
+}
+
+/* NAME */
 .menu-name {
-  margin-top: 16px;
-  font-size: clamp(14px, 2vw, 20px);
+  margin-top: 14px;
+  font-size: clamp(14px, 2vw, 18px);
   font-weight: 600;
-  letter-spacing: 1px;
-  color: var(--text-dark);
+  letter-spacing: 0.6px;
+  color: var(--text);
 }
 
-/* ==================================================
-   MOBILE (≤600px) — SECOND CODE STYLE
-================================================== */
+/* MOBILE REFINEMENT */
 @media (max-width: 600px) {
-
-  .menu-section {
-    padding: 50px 20px;
-    background: #fdecef;
-  }
-
-  .menu-title {
-    font-size: 32px;
-  }
-
-  .menu-sub {
-    font-size: 18px;
-    margin-bottom: 40px;
-  }
-
-  /* 2 COLUMN GRID — OLD STYLE */
   .menu-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
+    gap: 16px;
   }
 
-  /* FLAT CARD — OLD LOOK */
-  .menu-card {
-    padding: 10px;
-    box-shadow: none;
-    border-radius: 16px;
-    transform: none;
+  .menu-img-wrapper {
+    border-radius: 18px;
   }
 
-  /* REMOVE STARS */
-  .stars {
-    display: none;
-  }
-
-  /* IMAGE — FIXED HEIGHT (OLD MOBILE STYLE) */
-  .menu-img {
-    aspect-ratio: unset;   /* override desktop */
-    height: 165px;
-    border-radius: 16px;
-  }
-
-  /* NAME */
   .menu-name {
-    font-size: 14px;
     margin-top: 10px;
-    letter-spacing: 0.6px;
+    font-size: 14px;
   }
 }
