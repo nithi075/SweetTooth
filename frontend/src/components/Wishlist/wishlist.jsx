@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiHeart } from "react-icons/fi";
-import "./Treat.css"; // 🔥 SAME CSS AS TREAT
 import API from "../api";
+import "./wishlist.css";
 
 /* BACKEND URL */
 const BACKEND_URL =
