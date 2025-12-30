@@ -14,11 +14,7 @@ export const placeOrder = async (req, res) => {
     // 🔥 GET CART
     const cart = await Cart.findOne();
 
-    if (!cart) {
-      return res.status(400).json({ error: "Cart not found" });
-    }
-
-    if (!cart.items || cart.items.length === 0) {
+    if (!cart || !cart.items || cart.items.length === 0) {
       return res.status(400).json({ error: "Cart is empty" });
     }
 
@@ -32,7 +28,18 @@ export const placeOrder = async (req, res) => {
     let total = 0;
 
     cart.items.forEach((item, index) => {
-      message += `\n${index + 1}. ${item.title}\n`;
+      // ✅ IMAGE URL FIX
+      let imageUrl = "";
+      if (item.img) {
+        imageUrl = item.img.startsWith("http")
+          ? item.img
+          : `https://sweettooth-backend.onrender.com${item.img}`;
+      }
+
+      // ✅ CAKE PAGE LINK
+      const cakeLink = `https://sweettooth-pkaq.onrender.com/cake/${item.productId}`;
+
+      message += `\n${index + 1}. *${item.title}*\n`;
       message += `   Qty: ${item.qty}\n`;
       message += `   Price: ₹${item.price}\n`;
 
@@ -40,8 +47,11 @@ export const placeOrder = async (req, res) => {
         message += `   Message: "${item.message}"\n`;
       }
 
-      // 🔥 IMAGE LINK (VERY IMPORTANT)
-      message += `   Image: http://localhost:5000${item.img}\n`;
+      if (imageUrl) {
+        message += `   🖼 Image: ${imageUrl}\n`;
+      }
+
+      message += `   🔗 Cake Link: ${cakeLink}\n`;
 
       total += item.price * item.qty;
     });
@@ -53,7 +63,7 @@ export const placeOrder = async (req, res) => {
       "https://wa.me/918667041407?text=" +
       encodeURIComponent(message);
 
-    // 🔥 CLEAR CART AFTER ORDER
+    // 🔥 CLEAR CART
     cart.items = [];
     await cart.save();
 
