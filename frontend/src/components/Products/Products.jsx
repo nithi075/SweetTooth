@@ -1,115 +1,179 @@
 import { useEffect, useState } from "react";
-import "./Products.css";
-import { FiHeart } from "react-icons/fi";
-import API from "../api";
 import { useNavigate } from "react-router-dom";
+import "./cart.css";
+import { FiTrash2, FiEdit2 } from "react-icons/fi";
+import API from "../api";
 
-export default function IndiaLoves() {
-  const [cakes, setCakes] = useState([]);
-  const [wishlist, setWishlist] = useState([]);
+export default function Cart() {
+  const [cart, setCart] = useState([]);
   const navigate = useNavigate();
 
-  /* ================= FETCH PRODUCTS ================= */
-  useEffect(() => {
-    API.get("/products")
-      .then((res) => setCakes(res.data))
-      .catch((err) => console.error("Products error:", err));
-  }, []);
+  /* =========================
+     IMAGE LOGIC (FIXED)
+  ========================= */
+  const getImageSrc = (img) => {
+    if (!img) return "/placeholder-cake.jpg";
 
-  /* ================= FETCH WISHLIST ================= */
-  useEffect(() => {
-    API.get("/wishlist")
-      .then((res) => {
-        const ids = res.data.map((item) => item.productId);
-        setWishlist(ids);
-      })
-      .catch((err) => console.error("Wishlist error:", err));
-  }, []);
+    // Cloudinary / external URL
+    if (img.startsWith("http")) return img;
 
-  /* ================= TOGGLE WISHLIST ================= */
-  const toggleWishlist = async (cake, e) => {
-    e.stopPropagation();
+    // Local backend image
+    return `http://localhost:5000${img}`;
+  };
 
+  /* =========================
+     FETCH CART
+  ========================= */
+  const fetchCart = async () => {
     try {
-      const res = await API.post("/wishlist", {
-        productId: cake._id,
-        title: cake.title,
-        price: cake.priceByKg?.["1"],
-        img: cake.images?.[0], // 🔥 Cloudinary URL
-        badge: cake.bestseller ? "Best Seller" : "",
-      });
-
-      const ids = res.data.map((item) => item.productId);
-      setWishlist(ids);
+      const res = await API.get("/cart");
+      setCart(res.data);
     } catch (err) {
-      console.error("Wishlist toggle error:", err);
+      console.error("Fetch cart failed", err);
     }
   };
 
+  useEffect(() => {
+    fetchCart();
+  }, []);
+
+  /* =========================
+     UPDATE QTY
+  ========================= */
+  const updateQty = async (id, type) => {
+    try {
+      await API.put(`/cart/${id}`, { type });
+      fetchCart();
+    } catch (err) {
+      console.error("Qty update failed", err);
+    }
+  };
+
+  /* =========================
+     REMOVE ITEM
+  ========================= */
+  const removeItem = async (id) => {
+    try {
+      await API.delete(`/cart/${id}`);
+      fetchCart();
+    } catch (err) {
+      console.error("Remove failed", err);
+    }
+  };
+
+  /* =========================
+     TOTAL CALCULATION
+  ========================= */
+  const subtotal = cart.reduce(
+    (sum, item) => sum + item.price * item.qty,
+    0
+  );
+
   return (
-    <section className="india-loves">
-      <h1 className="il-title">Best Bakes</h1>
-      <p className="il-sub">Our Cakes. Your Happy Moments.</p>
+    <section className="cart-section">
+      <h2 className="cart-title">Your Cart</h2>
 
-      {/* 🔥 HORIZONTAL SCROLL LIST */}
-      <div className="il-grid">
-        {cakes.slice(0, 8).map((cake) => {
-          const imageSrc = cake.images?.[0] || "/placeholder-cake.jpg";
+      {/* ================= EMPTY CART ================= */}
+      {cart.length === 0 && (
+        <div className="empty-cart-box">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2038/2038854.png"
+            alt="Empty Cart"
+            className="empty-cart-img"
+          />
+          <h3>Your cart is empty</h3>
+          <p>Add something sweet 😄</p>
+          <button
+            className="shop-now-btn"
+            onClick={() => navigate("/treat")}
+          >
+            SHOP NOW
+          </button>
+        </div>
+      )}
 
-          return (
-            <div
-              className="il-card"
-              key={cake._id}
-              onClick={() => navigate(`/cake/${cake._id}`)}
-            >
-              {/* IMAGE */}
-              <div className="il-img-box">
-                <img
-                  src={imageSrc}
-                  alt={cake.title}
-                  className="il-img"
-                  onError={(e) => {
-                    e.currentTarget.src = "/placeholder-cake.jpg";
-                  }}
-                />
-              </div>
+      {/* ================= CART ITEMS ================= */}
+      {cart.map((item) => (
+        <div className="cart-card" key={item._id}>
+          {/* ✅ FIXED IMAGE */}
+          <img
+            src={getImageSrc(item.img)}
+            className="cart-img"
+            alt={item.title}
+            onError={(e) => {
+              e.currentTarget.src = "/placeholder-cake.jpg";
+            }}
+          />
 
-              {/* CONTENT */}
-              <div className="il-content">
-                <h3 className="il-name">{cake.title}</h3>
+          <div className="cart-info">
+            <h3>{item.title}</h3>
 
-                <div className="price-heart-row">
-                  <p className="il-price">
-                    ₹{cake.priceByKg?.["1"]}
-                  </p>
+            {/* KG */}
+            {item.kg && (
+              <p className="cart-kg">
+                Weight: <strong>{item.kg}</strong>
+              </p>
+            )}
 
-                  <FiHeart
-                    className={`heart ${
-                      wishlist.includes(cake._id) ? "active" : ""
-                    }`}
-                    onClick={(e) => toggleWishlist(cake, e)}
-                  />
-                </div>
+            <p className="cart-price">₹{item.price}</p>
 
-                <div className="il-rating">
-                  <span className="star">★</span>
-                  <span>{cake.rating || 4.5}</span>
-                </div>
-              </div>
+            {/* QTY */}
+            <div className="qty-row">
+              <button onClick={() => updateQty(item._id, "decrease")}>
+                −
+              </button>
+              <span>{item.qty}</span>
+              <button onClick={() => updateQty(item._id, "increase")}>
+                +
+              </button>
             </div>
-          );
-        })}
-      </div>
 
-      {/* 🔥 VIEW ALL */}
-      <div className="view-all-wrap">
-        <button
-          className="view-all-btn"
-          onClick={() => navigate("/treat")}
-        >
-          VIEW ALL
-        </button>
-      </div>
+            {/* CAKE MESSAGE */}
+            {item.message && (
+              <div className="message-row">
+                <span>
+                  <strong>Message:</strong> {item.message}
+                </span>
+                <FiEdit2 className="edit-icon" />
+              </div>
+            )}
+          </div>
+
+          <FiTrash2
+            className="delete-icon"
+            onClick={() => removeItem(item._id)}
+          />
+        </div>
+      ))}
+
+      {/* ================= BILL SUMMARY ================= */}
+      {cart.length > 0 && (
+        <div className="bill-box">
+          <h3>Order Summary</h3>
+
+          <div className="bill-row">
+            <span>Item Total</span>
+            <span>₹{subtotal}</span>
+          </div>
+
+          <div className="bill-row">
+            <span>Delivery Fee</span>
+            <span className="free">Free</span>
+          </div>
+
+          <div className="bill-row grand">
+            <span>Grand Total</span>
+            <span>₹{subtotal}</span>
+          </div>
+
+          <button
+            className="proceed-btn"
+            onClick={() => navigate("/checkout")}
+          >
+            PROCEED TO ORDER
+          </button>
+        </div>
+      )}
     </section>
   );
 }
