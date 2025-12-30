@@ -15,18 +15,14 @@ export default function Wishlist() {
   const [wishlistIds, setWishlistIds] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  /* =========================
-     IMAGE HANDLER (SAME AS TREAT)
-  ========================= */
+  /* IMAGE HANDLER */
   const getImageUrl = (img) => {
     if (!img) return "/assets/placeholder.png";
     if (img.startsWith("http")) return img;
     return `${BACKEND_URL}${img}`;
   };
 
-  /* =========================
-     FETCH WISHLIST
-  ========================= */
+  /* FETCH WISHLIST */
   const fetchWishlist = async () => {
     try {
       const res = await API.get("/wishlist");
@@ -43,9 +39,7 @@ export default function Wishlist() {
     fetchWishlist();
   }, []);
 
-  /* =========================
-     TOGGLE WISHLIST (SAME AS TREAT)
-  ========================= */
+  /* TOGGLE WISHLIST */
   const toggleWishlist = async (cake, e) => {
     e.stopPropagation();
     try {
@@ -64,19 +58,21 @@ export default function Wishlist() {
     }
   };
 
-  /* =========================
-     LOADING
-  ========================= */
+  /* LOADING */
   if (loading) {
-    return <div style={{ padding: 40, textAlign: "center" }}>Loading wishlist…</div>;
+    return (
+      <section className="wishlist-section">
+        <h2 className="wishlist-title">Your Wishlist ❤️</h2>
+        <div className="wishlist-loading">Loading wishlist…</div>
+      </section>
+    );
   }
 
-  /* =========================
-     EMPTY
-  ========================= */
+  /* EMPTY */
   if (wishlistItems.length === 0) {
     return (
-      <section className="treats-section">
+      <section className="wishlist-section">
+        <h2 className="wishlist-title">Your Wishlist ❤️</h2>
         <div className="wishlist-empty">
           <p>No favourites yet</p>
           <span>Tap ❤️ on cakes to save them</span>
@@ -85,12 +81,14 @@ export default function Wishlist() {
     );
   }
 
-  /* =========================
-     UI (🔥 EXACT TREAT STYLE)
-  ========================= */
+  /* UI */
   return (
-    <section className="treats-section">
-      <div className="treats-grid">
+    <section className="wishlist-section">
+      {/* 🔥 TITLE */}
+      <h2 className="wishlist-title">Your Wishlist ❤️</h2>
+
+      {/* 🔥 CARDS */}
+      <div className="treats-grid wishlist-grid">
         {wishlistItems.map((cake) => (
           <div
             key={cake._id}
