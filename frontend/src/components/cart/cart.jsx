@@ -9,6 +9,23 @@ export default function Cart() {
   const navigate = useNavigate();
 
   /* =========================
+     IMAGE HANDLER (FIXED)
+  ========================= */
+  const getImageSrc = (img) => {
+    if (!img || typeof img !== "string") {
+      return "/placeholder-cake.jpg";
+    }
+
+    // ✅ Cloudinary / external URL
+    if (img.startsWith("http")) {
+      return img;
+    }
+
+    // ✅ Local backend image
+    return `http://localhost:5000${img}`;
+  };
+
+  /* =========================
      FETCH CART
   ========================= */
   const fetchCart = async () => {
@@ -49,7 +66,7 @@ export default function Cart() {
   };
 
   /* =========================
-     TOTAL CALCULATION
+     TOTAL
   ========================= */
   const subtotal = cart.reduce(
     (sum, item) => sum + item.price * item.qty,
@@ -60,7 +77,7 @@ export default function Cart() {
     <section className="cart-section">
       <h2 className="cart-title">Your Cart</h2>
 
-      {/* ================= EMPTY CART ================= */}
+      {/* EMPTY CART */}
       {cart.length === 0 && (
         <div className="empty-cart-box">
           <img
@@ -79,19 +96,24 @@ export default function Cart() {
         </div>
       )}
 
-      {/* ================= CART ITEMS ================= */}
+      {/* CART ITEMS */}
       {cart.map((item) => (
         <div className="cart-card" key={item._id}>
+          {/* ✅ FIXED IMAGE */}
           <img
-            src={`http://localhost:5000${item.img}`}
+            src={getImageSrc(item.img)}
             className="cart-img"
             alt={item.title}
+            loading="lazy"
+            onError={(e) => {
+              console.log("Image failed:", item.img);
+              e.currentTarget.src = "/placeholder-cake.jpg";
+            }}
           />
 
           <div className="cart-info">
             <h3>{item.title}</h3>
 
-            {/* ✅ KG DISPLAY */}
             {item.kg && (
               <p className="cart-kg">
                 Weight: <strong>{item.kg}</strong>
@@ -100,18 +122,12 @@ export default function Cart() {
 
             <p className="cart-price">₹{item.price}</p>
 
-            {/* QTY */}
             <div className="qty-row">
-              <button onClick={() => updateQty(item._id, "decrease")}>
-                −
-              </button>
+              <button onClick={() => updateQty(item._id, "decrease")}>−</button>
               <span>{item.qty}</span>
-              <button onClick={() => updateQty(item._id, "increase")}>
-                +
-              </button>
+              <button onClick={() => updateQty(item._id, "increase")}>+</button>
             </div>
 
-            {/* CAKE MESSAGE */}
             {item.message && (
               <div className="message-row">
                 <span>
@@ -129,7 +145,7 @@ export default function Cart() {
         </div>
       ))}
 
-      {/* ================= BILL SUMMARY ================= */}
+      {/* BILL */}
       {cart.length > 0 && (
         <div className="bill-box">
           <h3>Order Summary</h3>
