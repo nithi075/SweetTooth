@@ -1,22 +1,21 @@
 /* =============================
-   WISHLIST SECTION
+   WISHLIST SECTION (TREAT STYLE)
 ============================= */
 .wishlist-section {
-    
-  margin-top: 70px;
+  margin-top: 60px;
   min-height: 100vh;
   background: var(--bg-light);
-  padding-bottom: 40px;
   font-family: 'Quicksand', sans-serif;
 }
 
-/* TITLE */
+/* =============================
+   TITLE
+============================= */
 .wishlist-title {
-  text-align: center;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   color: var(--text-dark);
-  padding: 12px 16px;
+  padding: 12px 14px;
 }
 
 /* =============================
@@ -28,42 +27,51 @@
   color: var(--text-light);
 }
 
-.wishlist-empty img {
-  width: 140px;
-  margin-bottom: 16px;
-  opacity: 0.85;
-}
-
 .wishlist-empty p {
   font-size: 16px;
   font-weight: 700;
-  margin-bottom: 4px;
   color: var(--text-dark);
+  margin-bottom: 4px;
 }
 
 .wishlist-empty span {
   font-size: 13px;
 }
 
+/* EMPTY ICON */
+.wishlist-empty-img {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
 /* =============================
-   GRID (REUSE TREATS GRID)
+   GRID (EXACT SAME AS TREAT)
 ============================= */
 .wishlist-grid {
-  padding-top: 8px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 10px;
 }
 
 /* =============================
-   HEART ALWAYS ACTIVE
-============================= */
-.wishlist-grid .heart-icon {
-  color: var(--pink);
-}
-
-/* =============================
-   REMOVE ANIMATION (OPTIONAL)
+   CARD (REUSE TREAT CARD)
 ============================= */
 .wishlist-grid .treat-card {
-  transition: transform 0.25s ease, opacity 0.25s ease;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease;
 }
 
 .wishlist-grid .treat-card:active {
@@ -71,17 +79,101 @@
 }
 
 /* =============================
+   IMAGE
+============================= */
+.wishlist-grid .card-img-box {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.wishlist-grid .treat-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =============================
+   BADGE
+============================= */
+.wishlist-grid .badge {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  background: #ffb703;
+  color: #111;
+  font-size: 10px;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+/* =============================
+   CONTENT
+============================= */
+.wishlist-grid .card-content {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wishlist-grid .cake-name {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.wishlist-grid .price {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111;
+}
+
+/* =============================
+   HEART (ALWAYS ACTIVE)
+============================= */
+.wishlist-grid .heart-icon {
+  color: var(--pink);
+}
+
+/* =============================
+   LOADING
+============================= */
+.wishlist-loading {
+  padding: 60px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+/* =============================
    IPAD
 ============================= */
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (min-width: 768px) {
   .wishlist-title {
-    font-size: 22px;
     padding: 16px 40px;
+    font-size: 22px;
   }
 
   .wishlist-grid {
-    padding-left: 40px;
-    padding-right: 40px;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 18px 40px;
+    gap: 18px;
+  }
+
+  .wishlist-grid .cake-name {
+    font-size: 14px;
+  }
+
+  .wishlist-grid .price {
+    font-size: 14px;
   }
 }
 
@@ -95,34 +187,16 @@
   }
 
   .wishlist-grid {
-    padding-left: 120px;
-    padding-right: 120px;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 24px 120px;
+    gap: 26px;
   }
 
-  .wishlist-empty img {
-    width: 180px;
+  .wishlist-grid .cake-name {
+    font-size: 15px;
   }
 
-  .wishlist-empty p {
-    font-size: 18px;
+  .wishlist-grid .price {
+    font-size: 15px;
   }
-}
-.wishlist-loading {
-  padding: 60px;
-  text-align: center;
-  font-size: 14px;
-  color: var(--text-light);
-}
-
-/* EMPTY IMAGE CONTAINER */
-.wishlist-empty-img {
-  width: 140px;
-  height: 140px;
-  margin: 0 auto 16px;
-  border-radius: 50%;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
 }
